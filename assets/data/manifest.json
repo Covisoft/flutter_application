@@ -1,0 +1,10 @@
+{
+    "appID": "2376178910",
+    "appName": "AppName",
+    "app-localize": {
+        "headerTitle": "Home",
+        "subTitle": "Hello world!",
+        "multiple_language": true,
+        "multiple_theme": true
+    }
+}
