@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/models/model.dart';
 import 'package:flutter_app/repository/repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -49,6 +50,7 @@ class AuthenticationBloc
     AuthenticationLogoutRequested event,
     Emitter<AuthenticationState> emit,
   ) {
+    AppBloc.userCubit.onClear();
     AuthenticationRepository.logOut();
   }
 }

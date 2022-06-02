@@ -15,22 +15,15 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-
-
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   void dispose() {
     super.dispose();
   }
-
-
-
-
 
   ///On logout
   void onLogout() async {
@@ -68,7 +61,7 @@ class _AccountState extends State<Account> {
       },
     );
     if (result == true) {
-    
+      AppBloc.authenticationBloc.add(const AuthenticationLogoutRequested());
     }
   }
 
@@ -76,8 +69,6 @@ class _AccountState extends State<Account> {
   void onNavigate(String route) {
     Navigator.pushNamed(context, route);
   }
-
-
 
   @override
   Widget build(BuildContext context) {

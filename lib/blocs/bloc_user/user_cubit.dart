@@ -74,4 +74,8 @@ class UserCubit extends Cubit<UserModel?> {
     AppBloc.authenticationBloc.add(
         const AuthenticationStatusChanged(AuthenticationStatus.authenticated));
   }
+
+  void onClear() {
+    emit(null);
+  }
 }
