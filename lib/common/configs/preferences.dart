@@ -11,6 +11,7 @@ class Preferences {
   static const String font = 'font';
   static const String reportPeriod = 'reportPeriod';
   static const String reportItems = 'reportItems';
+  static const String rememberUser = 'rememberUser';
 
   static Future<void> setPreferences() async {
     instance = await SharedPreferences.getInstance();

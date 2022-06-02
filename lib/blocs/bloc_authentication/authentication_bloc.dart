@@ -13,6 +13,8 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(AuthenticationState.unknown()) {
     _mapEventToState();
+    _authenticationStatusSubscription = AuthenticationRepository.status
+        .listen((status) => add(AuthenticationStatusChanged(status)));
   }
   _mapEventToState() {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
@@ -37,10 +39,7 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = await _tryGetUser();
-        return emit(user != null
-            ? AuthenticationState.authenticated(user)
-            : AuthenticationState.unauthenticated());
+        return emit(AuthenticationState.authenticated());
       default:
         return emit(AuthenticationState.unknown());
     }
@@ -51,14 +50,5 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     AuthenticationRepository.logOut();
-  }
-
-  Future<UserModel?> _tryGetUser() async {
-    try {
-      final user = await UserRepository.getUser();
-      return user;
-    } catch (_) {
-      return null;
-    }
   }
 }

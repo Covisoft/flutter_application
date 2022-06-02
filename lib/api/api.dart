@@ -24,5 +24,9 @@ class Api {
   static Future<ResultModel> requestLogin(params) =>
       APIAuthentication.requestLogin(params);
 
-  static Future<ResultModel> requestUser() => APIUser.requestUser();
+  static Future<ResultModel> requestRefreshToken(token) =>
+      APIAuthentication.requestRefreshToken(token);
+      
+  static Future<ResultModel> getInfoUser(String token) =>
+      APIUser.getInfoUser(token);
 }

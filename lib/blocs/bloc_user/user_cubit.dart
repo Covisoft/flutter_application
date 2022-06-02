@@ -1,23 +1,26 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app/blocs/bloc.dart';
+import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/models/model.dart';
 import 'package:flutter_app/repository/repository.dart';
 
 class UserCubit extends Cubit<UserModel?> {
   UserCubit() : super(null);
 
-  // ///On load user
-  // Future<UserModel?> onLoadUser() async {
-  //   ///Fetch API via repository
-  //   final result = await UserRepository.getUserRemote();
+  ///On load user
+  Future<UserModel?> onLoadUser(token) async {
+    ///Fetch API via repository
+    final result = await UserRepository.getUserRemote(token);
 
-  //   ///Case API success
-  //   if (result != null) {
-  //     await onSaveUser(result);
-  //     return result;
-  //   }
-  // }
+    ///Case API success
+    if (result != null) {
+      await onSaveUser(result);
+      return result;
+    }
+    return null;
+  }
 
   ///Only save to state
   Future<void> onSetUser(UserModel user) async {
@@ -31,4 +34,44 @@ class UserCubit extends Cubit<UserModel?> {
     emit(user);
   }
 
+  Future<void> onCheck() async {
+    UserModel? user = await UserRepository.getUser();
+    if (user != null) {
+      ///Attach token push
+      Application.setDeviceToken();
+
+      ///Trick Offline get token issue firebase
+      double delay = 0.0;
+      while (Application.device?.token == null && delay <= 2) {
+        await Future.delayed(const Duration(milliseconds: 500));
+        delay += 0.25;
+      }
+
+      ///Save user
+      await onSaveUser(user);
+
+      ///Refresh token
+      final result = await AuthenticationRepository.refreshToken(user.token);
+      if (result != null) {
+        ///Update user
+        await onSaveUser(result);
+        AppBloc.authenticationBloc.add(const AuthenticationStatusChanged(
+            AuthenticationStatus.authenticated));
+      }
+    } else {
+      ///Notify
+      AppBloc.authenticationBloc.add(const AuthenticationStatusChanged(
+          AuthenticationStatus.unauthenticated));
+    }
+  }
+
+  ///onAuthSync
+  Future<void> onSave(UserModel user) async {
+    ///Save user
+    await onSaveUser(user);
+
+    ///Notify
+    AppBloc.authenticationBloc.add(
+        const AuthenticationStatusChanged(AuthenticationStatus.authenticated));
+  }
 }

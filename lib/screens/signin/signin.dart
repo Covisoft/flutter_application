@@ -26,11 +26,6 @@ class _SignInState extends State<SignIn> {
     super.dispose();
   }
 
-  ///On login
-  Future<void> onLogin() async {
-    // AppBloc.signCubit.onLogin(username: '+84377846295', password: 'tvtabc123@');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

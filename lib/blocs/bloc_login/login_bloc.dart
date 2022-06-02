@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/repository/repository.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -47,11 +47,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
-        await AuthenticationRepository.login(
+        var result = await AuthenticationRepository.login(
           username: state.username.value,
           password: state.password.value,
         );
-        emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        if (result) {
+          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        } else {
+          emit(state.copyWith(status: FormzStatus.submissionFailure));
+        }
       } catch (_) {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
       }

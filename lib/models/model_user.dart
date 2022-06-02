@@ -7,10 +7,10 @@ import 'package:flutter_app/models/model.dart';
 class UserModel extends Equatable {
   final String id;
   final String username;
-  final String? token;
+  String? token;
   bool active;
 
-   UserModel({
+  UserModel({
     required this.id,
     required this.username,
     this.token,
@@ -18,18 +18,20 @@ class UserModel extends Equatable {
   });
   static UserModel empty = UserModel(id: '', username: '', active: false);
 
-
   void setActive(bool active) {
     this.active = active;
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> user = json['user'];
+  void setToken(String? token) {
+    this.token = token;
+  }
 
+
+  factory UserModel.fromJson(json) {
     return UserModel(
-      id: user['_id'],
-      username: user['username'] ?? '',
-      token: json['token'] ?? AppBloc.userCubit.state!.token,
+      id: json['id'],
+      username: json['username'] ?? '',
+      token: json['token'] ?? AppBloc.userCubit.state?.token,
       active: false,
     );
   }

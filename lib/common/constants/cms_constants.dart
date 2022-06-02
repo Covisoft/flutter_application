@@ -4,4 +4,5 @@ class CmsConstants {
   static bool multipleThemes = false;
   static bool multipleLanguages = false;
   static bool multipleFonts = false;
+  static bool rememberLogin = false;
 }

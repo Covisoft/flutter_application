@@ -90,7 +90,7 @@ class ApplicationCubit extends Cubit<ApplicationState> {
       font: font,
       darkOption: darkOption,
     );
-    await Future.delayed(const Duration(milliseconds: 1000));
+    if (CmsConstants.rememberLogin) await AppBloc.userCubit.onCheck();
 
     ///Done
     emit(ApplicationState.completed);
