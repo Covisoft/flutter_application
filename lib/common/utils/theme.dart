@@ -1,8 +1,6 @@
-
 import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/models/model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class UtilTheme {
   static ThemeData getTheme({

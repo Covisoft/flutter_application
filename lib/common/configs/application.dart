@@ -14,7 +14,6 @@ class Application {
   static const String clientID = "";
   static const String domain = "https://api.saleboltapp.com";
   static const String baseUrl = 'http://159.223.87.59:8000/api/v1';
-  static const String baseUrlToken = 'http://171.244.37.66:8080';
   static const String playStoreID = "";
   static const String appStoreID = "";
   static const String statementSyncTime = '2021-01-01';

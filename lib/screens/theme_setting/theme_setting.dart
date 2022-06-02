@@ -21,11 +21,6 @@ class _ThemeSettingState extends State<ThemeSetting> {
   bool custom = false;
   Color? primaryColor;
   Color? secondaryColor;
-  Color? errorColor;
-  Color? successColor;
-  Color? warningColor;
-  Color? darkColor;
-  Color? lightColor;
 
   @override
   void initState() {
@@ -46,11 +41,6 @@ class _ThemeSettingState extends State<ThemeSetting> {
         name: 'custom',
         primary: primaryColor ?? Theme.of(context).primaryColor,
         secondary: secondaryColor ?? Theme.of(context).colorScheme.secondary,
-        error: errorColor ?? Theme.of(context).errorColor,
-        success: successColor ?? Theme.of(context).primaryColor,
-        warning: warningColor ?? Theme.of(context).primaryColor,
-        dark: darkColor ?? Theme.of(context).primaryColor,
-        light: lightColor ?? Theme.of(context).primaryColor,
       );
     }
     AppBloc.themeCubit.onChangeTheme(theme: theme);

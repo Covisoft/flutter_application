@@ -32,7 +32,6 @@ class HTTPManager {
         responseType: ResponseType.json,
       ),
     );
-
   }
 
   ///Post method
@@ -50,7 +49,7 @@ class HTTPManager {
         data: data,
         options: options,
       );
-      return response.data;
+      return {'statusCode': response.statusCode, 'data': response.data};
     } on DioError catch (error) {
       return errorHandle(error);
     }
@@ -73,7 +72,28 @@ class HTTPManager {
         queryParameters: params,
         options: options,
       );
-      return response.data;
+      return {'statusCode': response.statusCode, 'data': response.data};
+    } on DioError catch (error) {
+      return errorHandle(error);
+    }
+  }
+
+  ///Post method
+  Future<dynamic> put(
+      {required String url,
+      Map<String, dynamic>? data,
+      Options? options}) async {
+    Dio request = dioInternal;
+    if (Application.external) {
+      request = dioExternal;
+    }
+    try {
+      final response = await request.put(
+        url,
+        data: data,
+        options: options,
+      );
+      return {'statusCode': response.statusCode, 'data': response.data};
     } on DioError catch (error) {
       return errorHandle(error);
     }
@@ -83,7 +103,6 @@ class HTTPManager {
   void printRequest(RequestOptions options) {
     UtilLogger.log("BEFORE REQUEST ====================================");
     UtilLogger.log("${options.method} URL", options.path);
-    UtilLogger.log("HEADERS", options.headers);
     if (options.method == 'GET') {
       UtilLogger.log("PARAMS", options.queryParameters);
     } else {
