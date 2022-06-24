@@ -1,8 +1,8 @@
 import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/common/utils/utils.dart';
-import 'package:flutter_app/common/widgets/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/widgets/widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
@@ -18,6 +18,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   void initState() {
+    AppBloc.loginBloc.add(const LoginInitiated());
     super.initState();
   }
 
@@ -50,26 +51,17 @@ class _SignInState extends State<SignIn> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               image: const DecorationImage(
-                                image: AssetImage(Images.icon),
+                                image: AssetImage(ConfigImages.icon),
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
                           const SizedBox(height: 16),
-                          // Text(
-                          //   Application.appConfig.appName,
-                          //   style: Theme.of(context)
-                          //       .textTheme
-                          //       .headline5!
-                          //       .copyWith(fontWeight: FontWeight.bold),
-                          // ),
                           Padding(
                             padding: const EdgeInsets.all(24),
                             child: Text(
-                              Translate.of(context).translate(
-                                'app_slogan',
-                              ),
-                              style: Theme.of(context).textTheme.bodyText2,
+                              Translate.of(context).translate('app_slogan'),
+                              style: ConfigText.textTheme.bodyText2,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -77,7 +69,17 @@ class _SignInState extends State<SignIn> {
                           const Padding(padding: EdgeInsets.all(12)),
                           _PasswordInput(),
                           const Padding(padding: EdgeInsets.all(12)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              _RememberLogin(),
+                              _ForgotPassword()
+                            ],
+                          ),
+                          const Padding(padding: EdgeInsets.all(12)),
                           _LoginButton(),
+                          const Padding(padding: EdgeInsets.all(12)),
+                          const _CreateAccount()
                         ],
                       ),
                     ),
@@ -86,9 +88,10 @@ class _SignInState extends State<SignIn> {
                 const SizedBox(height: 8),
                 Text(
                   Translate.of(context).translate('app_noted'),
-                  style: Theme.of(context).textTheme.caption,
+                  style: ConfigText.textTheme.caption,
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 8),
               ],
             ),
           ),
@@ -98,20 +101,93 @@ class _SignInState extends State<SignIn> {
   }
 }
 
+class _CreateAccount extends StatelessWidget {
+  const _CreateAccount({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(children: [
+        TextSpan(
+            text: Translate.of(context).translate('no_have_account'),
+            style: ConfigText.textTheme.bodyText1),
+        TextSpan(
+            text: Translate.of(context).translate('sign_up'),
+            style: ConfigText.primaryTextTheme.bodyText1)
+      ]),
+    );
+  }
+}
+
+class _ForgotPassword extends StatelessWidget {
+  const _ForgotPassword({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Text(
+        Translate.of(context).translate('forgot_password'),
+        style: ConfigText.textTheme.subtitle1,
+      ),
+    );
+  }
+}
+
+class _RememberLogin extends StatefulWidget {
+  const _RememberLogin({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_RememberLogin> createState() => _RememberLoginState();
+}
+
+class _RememberLoginState extends State<_RememberLogin> {
+  bool rememberLogin = false;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          rememberLogin = !rememberLogin;
+        });
+      },
+      child: Row(
+        children: [
+          AppCheckBox(
+            isChecked: rememberLogin,
+            size: 21,
+            checkedFillColor: Theme.of(context).primaryColor,
+            unCheckedBorderColor: Theme.of(context).primaryColor,
+          ),
+          Text(Translate.of(context).translate('remember_login'),
+              style: ConfigText.textTheme.subtitle1),
+        ],
+      ),
+    );
+  }
+}
+
 class _UsernameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.username != current.username,
       builder: (context, state) {
-        return TextField(
+        return AppTextInput(
           key: const Key('loginForm_usernameInput_textField'),
           onChanged: (username) =>
-              context.read<LoginBloc>().add(LoginUsernameChanged(username)),
-          decoration: InputDecoration(
-            labelText: 'username',
-            errorText: state.username.invalid ? 'invalid username' : null,
-          ),
+              AppBloc.loginBloc.add(LoginUsernameChanged(username)),
+          keyboardType: TextInputType.phone,
+          labelText: Translate.of(context).translate('phone'),
+          errorText: state.username.invalid
+              ? Translate.of(context).translate('value_not_valid_phone')
+              : null,
         );
       },
     );
@@ -124,15 +200,16 @@ class _PasswordInput extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return TextField(
+        return AppTextInput(
           key: const Key('loginForm_passwordInput_textField'),
           onChanged: (password) =>
-              context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+              AppBloc.loginBloc.add(LoginPasswordChanged(password)),
           obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'password',
-            errorText: state.password.invalid ? 'invalid password' : null,
-          ),
+          labelText: Translate.of(context).translate('password'),
+          maxLines: 1,
+          errorText: state.password.invalid
+              ? Translate.of(context).translate('value_not_valid_password')
+              : null,
         );
       },
     );
@@ -147,15 +224,13 @@ class _LoginButton extends StatelessWidget {
       builder: (context, state) {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
-            : ElevatedButton(
-                key: const Key('loginForm_continue_raisedButton'),
-                child: const Text('Login'),
-                onPressed: state.status.isValidated
-                    ? () {
-                        context.read<LoginBloc>().add(const LoginSubmitted());
-                      }
-                    : null,
-              );
+            : AppButton(
+                text: Translate.of(context).translate('sign_in'),
+                mainAxisSize: MainAxisSize.max,
+                disabled: !state.status.isValidated,
+                onPressed: () {
+                  AppBloc.loginBloc.add(const LoginSubmitted());
+                });
       },
     );
   }

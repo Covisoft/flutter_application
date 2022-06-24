@@ -8,7 +8,7 @@ class UtilTimeZone {
     final local = DateTime.now();
     final utc = DateTime.now().toUtc();
     DateTime convert = utc.add(local.timeZoneOffset);
-    if (Application.localTimeZone == false) {
+    if (ConfigApplication.localTimeZone == false) {
       convert = utc.add(const Duration(hours: 10));
     }
     return convert;
@@ -37,11 +37,11 @@ class UtilTimeZone {
   }) {
     final local = DateTime.now();
     DateTime convert = datetime.add(local.timeZoneOffset);
-    if (Application.localTimeZone == false) {
+    if (ConfigApplication.localTimeZone == false) {
       convert = datetime.add(const Duration(hours: 10));
     }
     return DateFormat(
-      format ?? Application.dateFormat,
+      format ?? ConfigApplication.dateFormat,
       language ?? AppBloc.languageCubit.state.languageCode,
     ).format(convert);
   }
@@ -51,7 +51,7 @@ class UtilTimeZone {
   static DateTime utcToZone(DateTime datetime) {
     final local = DateTime.now();
     DateTime convert = datetime.add(local.timeZoneOffset);
-    if (Application.localTimeZone == false) {
+    if (ConfigApplication.localTimeZone == false) {
       convert = datetime.add(const Duration(hours: 10));
     }
     return convert;
@@ -63,7 +63,7 @@ class UtilTimeZone {
   static DateTime zoneToUtc(DateTime datetime) {
     final local = DateTime.now();
     DateTime convert = datetime.subtract(local.timeZoneOffset);
-    if (Application.localTimeZone == false) {
+    if (ConfigApplication.localTimeZone == false) {
       convert = datetime.subtract(const Duration(hours: 10));
     }
     return DateTime.utc(

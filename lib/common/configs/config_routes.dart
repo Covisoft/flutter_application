@@ -1,10 +1,9 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/model.dart';
 import 'package:flutter_app/screens/screen.dart';
 
-class Routes {
+class ConfigRoutes {
   static const String home = "/home";
   static const String signIn = "/signIn";
   static const String forgotPassword = "/forgotPassword";
@@ -90,11 +89,11 @@ class Routes {
   }
 
   ///Singleton factory
-  static final Routes _instance = Routes._internal();
+  static final ConfigRoutes _instance = ConfigRoutes._internal();
 
-  factory Routes() {
+  factory ConfigRoutes() {
     return _instance;
   }
 
-  Routes._internal();
+  ConfigRoutes._internal();
 }

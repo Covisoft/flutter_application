@@ -4,67 +4,67 @@ import 'package:flutter_app/common/configs/config.dart';
 
 class UtilPreferences {
   static Future<bool> clear() {
-    return Preferences.instance!.clear();
+    return ConfigPreferences.instance!.clear();
   }
 
   static bool containsKey(String key) {
-    return Preferences.instance!.containsKey(key);
+    return ConfigPreferences.instance!.containsKey(key);
   }
 
   static dynamic get(String key) {
-    return Preferences.instance!.get(key);
+    return ConfigPreferences.instance!.get(key);
   }
 
   static bool? getBool(String key) {
-    return Preferences.instance!.getBool(key);
+    return ConfigPreferences.instance!.getBool(key);
   }
 
   static double? getDouble(String key) {
-    return Preferences.instance!.getDouble(key);
+    return ConfigPreferences.instance!.getDouble(key);
   }
 
   static int? getInt(String key) {
-    return Preferences.instance!.getInt(key);
+    return ConfigPreferences.instance!.getInt(key);
   }
 
   static Set<String> getKeys() {
-    return Preferences.instance!.getKeys();
+    return ConfigPreferences.instance!.getKeys();
   }
 
   static String? getString(String key) {
-    return Preferences.instance!.getString(key);
+    return ConfigPreferences.instance!.getString(key);
   }
 
   static List<String>? getStringList(String key) {
-    return Preferences.instance!.getStringList(key);
+    return ConfigPreferences.instance!.getStringList(key);
   }
 
   static Future<void> reload() {
-    return Preferences.instance!.reload();
+    return ConfigPreferences.instance!.reload();
   }
 
   static Future<bool> remove(String key) {
-    return Preferences.instance!.remove(key);
+    return ConfigPreferences.instance!.remove(key);
   }
 
   static Future<bool> setBool(String key, bool value) {
-    return Preferences.instance!.setBool(key, value);
+    return ConfigPreferences.instance!.setBool(key, value);
   }
 
   static Future<bool> setDouble(String key, double value) {
-    return Preferences.instance!.setDouble(key, value);
+    return ConfigPreferences.instance!.setDouble(key, value);
   }
 
   static Future<bool> setInt(String key, int value) {
-    return Preferences.instance!.setInt(key, value);
+    return ConfigPreferences.instance!.setInt(key, value);
   }
 
   static Future<bool> setString(String key, String value) {
-    return Preferences.instance!.setString(key, value);
+    return ConfigPreferences.instance!.setString(key, value);
   }
 
   static Future<bool> setStringList(String key, List<String> value) {
-    return Preferences.instance!.setStringList(key, value);
+    return ConfigPreferences.instance!.setStringList(key, value);
   }
 
   ///Singleton factory

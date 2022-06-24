@@ -17,7 +17,7 @@ class LanguageSetting extends StatefulWidget {
 class _LanguageSettingState extends State<LanguageSetting> {
   final textLanguageController = TextEditingController();
 
-  List<Locale> listLanguage = AppLanguage.supportLanguage;
+  List<Locale> listLanguage = ConfigAppLanguage.supportLanguage;
   Locale languageSelected = AppBloc.languageCubit.state;
 
   @override
@@ -35,7 +35,7 @@ class _LanguageSettingState extends State<LanguageSetting> {
   void onFilter(String text) {
     if (text.isEmpty) {
       setState(() {
-        listLanguage = AppLanguage.supportLanguage;
+        listLanguage = ConfigAppLanguage.supportLanguage;
       });
       return;
     }
@@ -65,7 +65,7 @@ class _LanguageSettingState extends State<LanguageSetting> {
         ),
         actions: [
           AppButton(
-            Translate.of(context).translate('apply'),
+            text:Translate.of(context).translate('apply'),
             onPressed: onChangeLanguage,
             type: ButtonType.text,
           ),

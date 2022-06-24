@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/common/utils/utils.dart';
 import 'package:flutter_app/models/model.dart';
@@ -24,19 +23,19 @@ class ThemeState {
 
   factory ThemeState.fromDefault() {
     return ThemeState(
-      theme: AppTheme.defaultTheme,
+      theme: ConfigAppTheme.defaultTheme,
       lightTheme: UtilTheme.getTheme(
-        theme: AppTheme.defaultTheme,
-        brightness: Brightness.light,
-        font: AppTheme.defaultFont,
+        theme: ConfigAppTheme.defaultTheme,
+        brightness: ConfigAppTheme.defaultBrightness,
+        font: ConfigAppTheme.defaultFont,
       ),
       darkTheme: UtilTheme.getTheme(
-        theme: AppTheme.defaultTheme,
-        brightness: Brightness.dark,
-        font: AppTheme.defaultFont,
+        theme: ConfigAppTheme.defaultTheme,
+        brightness: ConfigAppTheme.defaultBrightness,
+        font: ConfigAppTheme.defaultFont,
       ),
-      font: AppTheme.defaultFont,
-      darkOption: AppTheme.darkThemeOption,
+      font: ConfigAppTheme.defaultFont,
+      darkOption: ConfigAppTheme.darkThemeOption,
     );
   }
 }
@@ -50,7 +49,7 @@ class ThemeCubit extends Cubit<ThemeState> {
     DarkOption? darkOption,
   }) async {
     ///Setup Theme with setting darkOption
-    final currentState = AppBloc.themeCubit.state;
+    final currentState = state;
     theme ??= currentState.theme;
     font ??= currentState.font;
     darkOption ??= currentState.darkOption;
@@ -59,7 +58,7 @@ class ThemeCubit extends Cubit<ThemeState> {
 
     switch (darkOption) {
       case DarkOption.dynamic:
-        UtilPreferences.setString(Preferences.darkOption, 'dynamic');
+        UtilPreferences.setString(ConfigPreferences.darkOption, 'dynamic');
         themeState = ThemeState(
           theme: theme,
           lightTheme: UtilTheme.getTheme(
@@ -69,7 +68,7 @@ class ThemeCubit extends Cubit<ThemeState> {
           ),
           darkTheme: UtilTheme.getTheme(
             theme: theme,
-            brightness: Brightness.dark,
+            brightness: Brightness.light,
             font: font,
           ),
           font: font,
@@ -77,7 +76,7 @@ class ThemeCubit extends Cubit<ThemeState> {
         );
         break;
       case DarkOption.alwaysOn:
-        UtilPreferences.setString(Preferences.darkOption, 'on');
+        UtilPreferences.setString(ConfigPreferences.darkOption, 'on');
         themeState = ThemeState(
           theme: theme,
           lightTheme: UtilTheme.getTheme(
@@ -95,7 +94,7 @@ class ThemeCubit extends Cubit<ThemeState> {
         );
         break;
       case DarkOption.alwaysOff:
-        UtilPreferences.setString(Preferences.darkOption, 'off');
+        UtilPreferences.setString(ConfigPreferences.darkOption, 'off');
         themeState = ThemeState(
           theme: theme,
           lightTheme: UtilTheme.getTheme(
@@ -116,13 +115,13 @@ class ThemeCubit extends Cubit<ThemeState> {
 
     ///Preference save
     UtilPreferences.setString(
-      Preferences.theme,
+      ConfigPreferences.theme,
       jsonEncode(themeState.theme.toJson()),
     );
 
     ///Preference save
     if (themeState.font != null) {
-      UtilPreferences.setString(Preferences.font, themeState.font!);
+      UtilPreferences.setString(ConfigPreferences.font, themeState.font!);
     }
 
     ///Notify

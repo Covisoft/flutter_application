@@ -43,7 +43,7 @@ class _AppState extends State<App> {
                     debugShowCheckedModeBanner: false,
                     theme: theme.lightTheme,
                     darkTheme: theme.darkTheme,
-                    onGenerateRoute: Routes.generateRoute,
+                    onGenerateRoute: ConfigRoutes.generateRoute,
                     locale: locale,
                     localizationsDelegates: const [
                       Translate.delegate,
@@ -51,15 +51,15 @@ class _AppState extends State<App> {
                       GlobalWidgetsLocalizations.delegate,
                       GlobalCupertinoLocalizations.delegate,
                     ],
-                    supportedLocales: AppLanguage.supportLanguage,
+                    supportedLocales: ConfigAppLanguage.supportLanguage,
                     builder: DevicePreview.appBuilder,
                     home: Scaffold(
                       body: BlocListener<MessageBloc, MessageState>(
                         listener: (context, message) {
                           if (message.status == MessageStatus.show) {
-                            SnackBarAction? _barAction;
+                            SnackBarAction? barAction;
                             if (message.action != null) {
-                              _barAction = SnackBarAction(
+                              barAction = SnackBarAction(
                                 label: Translate.of(context).translate(
                                   message.action!,
                                 ),
@@ -72,7 +72,7 @@ class _AppState extends State<App> {
                                   message.text,
                                 ),
                               ),
-                              action: _barAction,
+                              action: barAction,
                               duration: Duration(
                                 seconds: message.duration ?? 1,
                               ),
@@ -83,6 +83,8 @@ class _AppState extends State<App> {
                         },
                         child: BlocBuilder<ApplicationCubit, ApplicationState>(
                           builder: (context, application) {
+                            ConfigSize().init(context);
+                            ConfigText().init(context);
                             if (application == ApplicationState.completed) {
                               if (auth.status ==
                                   AuthenticationStatus.authenticated) {

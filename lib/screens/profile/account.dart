@@ -44,14 +44,14 @@ class _AccountState extends State<Account> {
           ),
           actions: <Widget>[
             AppButton(
-              Translate.of(context).translate('close'),
+              text:Translate.of(context).translate('close'),
               onPressed: () {
                 Navigator.pop(context, false);
               },
               type: ButtonType.text,
             ),
             AppButton(
-              Translate.of(context).translate('log_out'),
+              text:Translate.of(context).translate('log_out'),
               onPressed: () {
                 Navigator.pop(context, true);
               },
@@ -107,7 +107,7 @@ class _AccountState extends State<Account> {
                       color: Theme.of(context).primaryColor,
                     ),
                     onPressed: () {
-                      onNavigate(Routes.setting);
+                      onNavigate(ConfigRoutes.setting);
                     },
                     trailing: Row(
                       children: const <Widget>[

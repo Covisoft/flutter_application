@@ -13,7 +13,7 @@ class LoginState with _$LoginState {
       status: FormzStatus.pure);
 }
 
-enum UsernameValidationError { empty }
+enum UsernameValidationError { empty, invalid }
 
 class Username extends FormzInput<String, UsernameValidationError> {
   const Username.pure() : super.pure('');
@@ -25,7 +25,7 @@ class Username extends FormzInput<String, UsernameValidationError> {
   }
 }
 
-enum PasswordValidationError { empty }
+enum PasswordValidationError { empty, invalid }
 
 class Password extends FormzInput<String, PasswordValidationError> {
   const Password.pure() : super.pure('');
@@ -33,6 +33,12 @@ class Password extends FormzInput<String, PasswordValidationError> {
 
   @override
   PasswordValidationError? validator(String? value) {
-    return value?.isNotEmpty == true ? null : PasswordValidationError.empty;
+    if (value?.isNotEmpty == true) {
+      if (value!.length < 6) {
+        return PasswordValidationError.invalid;
+      }
+      return null;
+    }
+    return PasswordValidationError.empty;
   }
 }

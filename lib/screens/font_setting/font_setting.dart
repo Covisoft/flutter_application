@@ -46,7 +46,7 @@ class _FontSettingState extends State<FontSetting> {
             ),
             actions: [
               AppButton(
-                Translate.of(context).translate('apply'),
+                text:Translate.of(context).translate('apply'),
                 onPressed: onChange,
                 type: ButtonType.text,
               ),
@@ -61,7 +61,7 @@ class _FontSettingState extends State<FontSetting> {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     Widget? trailing;
-                    final item = AppTheme.fontSupport[index];
+                    final item = ConfigAppTheme.fontSupport[index];
                     if (item == currentFont) {
                       trailing = Icon(
                         Icons.check,
@@ -71,7 +71,7 @@ class _FontSettingState extends State<FontSetting> {
                     return AppListTitle(
                       title: item,
                       trailing: trailing,
-                      border: item != AppTheme.fontSupport.last,
+                      border: item != ConfigAppTheme.fontSupport.last,
                       onPressed: () {
                         setState(() {
                           currentFont = item;
@@ -79,7 +79,7 @@ class _FontSettingState extends State<FontSetting> {
                       },
                     );
                   },
-                  childCount: AppTheme.fontSupport.length,
+                  childCount: ConfigAppTheme.fontSupport.length,
                 ),
               ),
             ),

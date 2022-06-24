@@ -1,7 +1,7 @@
 import 'package:flutter_app/common/utils/utils.dart';
 import 'package:flutter_app/models/model.dart';
 
-class Application {
+class ConfigApplication {
   /// [Production - Dev]
 
   static const bool debug = true;
@@ -33,11 +33,11 @@ class Application {
   }
 
   ///Singleton factory
-  static final Application _instance = Application._internal();
+  static final ConfigApplication _instance = ConfigApplication._internal();
 
-  factory Application() {
+  factory ConfigApplication() {
     return _instance;
   }
 
-  Application._internal();
+  ConfigApplication._internal();
 }

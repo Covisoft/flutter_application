@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/utils/utils.dart';
+import 'package:flutter_app/common/widgets/widget.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -25,10 +25,12 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawerMenu(),
       appBar: AppBar(
         title: Text(
           Translate.of(context).translate('dashboard'),
         ),
+        centerTitle: true,
       ),
       body: Center(
         child: Text(

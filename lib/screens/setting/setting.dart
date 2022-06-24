@@ -27,7 +27,7 @@ class _SettingState extends State<Setting> {
   void initState() {
     super.initState();
 
-    localTimeZone = Application.localTimeZone;
+    localTimeZone = ConfigApplication.localTimeZone;
     darkOption = AppBloc.themeCubit.state.darkOption;
   }
 
@@ -67,14 +67,14 @@ class _SettingState extends State<Setting> {
           ),
           actions: <Widget>[
             AppButton(
-              Translate.of(context).translate('close'),
+             text: Translate.of(context).translate('close'),
               onPressed: () {
                 Navigator.pop(context, false);
               },
               type: ButtonType.text,
             ),
             AppButton(
-              Translate.of(context).translate('apply'),
+              text:Translate.of(context).translate('apply'),
               onPressed: () {
                 Navigator.pop(context, true);
               },
@@ -165,14 +165,14 @@ class _SettingState extends State<Setting> {
           ),
           actions: <Widget>[
             AppButton(
-              Translate.of(context).translate('close'),
+             text: Translate.of(context).translate('close'),
               onPressed: () {
                 Navigator.pop(context, false);
               },
               type: ButtonType.text,
             ),
             AppButton(
-              Translate.of(context).translate('apply'),
+              text:Translate.of(context).translate('apply'),
               onPressed: () {
                 Navigator.pop(context, true);
               },
@@ -216,7 +216,7 @@ class _SettingState extends State<Setting> {
                   ),
                   title: Translate.of(context).translate('language'),
                   onPressed: () {
-                    onNavigate(Routes.changeLanguage);
+                    onNavigate(ConfigRoutes.changeLanguage);
                   },
                   trailing: Row(
                     children: <Widget>[
@@ -224,7 +224,7 @@ class _SettingState extends State<Setting> {
                         UtilLanguage.getGlobalLanguageName(
                           AppBloc.languageCubit.state.languageCode,
                         ),
-                        style: Theme.of(context).textTheme.caption,
+                        style: ConfigText.textTheme.caption,
                       ),
                       const Icon(Icons.keyboard_arrow_right),
                     ],
@@ -266,7 +266,7 @@ class _SettingState extends State<Setting> {
                   ),
                   title: Translate.of(context).translate('theme'),
                   onPressed: () {
-                    onNavigate(Routes.themeSetting);
+                    onNavigate(ConfigRoutes.themeSetting);
                   },
                   trailing: Container(
                     margin: const EdgeInsets.only(right: 8),
@@ -288,7 +288,7 @@ class _SettingState extends State<Setting> {
                         Translate.of(context).translate(
                           UtilTheme.langDarkOption(darkOption),
                         ),
-                        style: Theme.of(context).textTheme.caption,
+                        style: ConfigText.textTheme.caption,
                       ),
                       const Icon(Icons.keyboard_arrow_right),
                     ],
@@ -301,13 +301,13 @@ class _SettingState extends State<Setting> {
                   ),
                   title: Translate.of(context).translate('font'),
                   onPressed: () {
-                    onNavigate(Routes.fontSetting);
+                    onNavigate(ConfigRoutes.fontSetting);
                   },
                   trailing: Row(
                     children: <Widget>[
                       Text(
                         AppBloc.themeCubit.state.font ?? defaultFont,
-                        style: Theme.of(context).textTheme.caption,
+                        style: ConfigText.textTheme.caption,
                       ),
                       const Icon(Icons.keyboard_arrow_right),
                     ],

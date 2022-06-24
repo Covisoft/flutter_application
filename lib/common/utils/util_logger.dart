@@ -6,7 +6,7 @@ import 'package:flutter_app/common/configs/config.dart';
 
 class UtilLogger {
   static log([String tag = "LOGGER", dynamic msg]) {
-    if (Application.debug) {
+    if (ConfigApplication.debug) {
       developer.log('${msg ?? ''}', name: tag);
     }
   }

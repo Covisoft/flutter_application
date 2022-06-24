@@ -1,15 +1,15 @@
-class Images {
+class ConfigImages {
   static const String logo = "assets/images/logo.png";
   static const String icon = "assets/images/icon.png";
   static const String defaultImage = "assets/images/defaultImage.png";
   static const String defaultThumb = "assets/images/defaultImage.png";
 
   ///Singleton factory
-  static final Images _instance = Images._internal();
+  static final ConfigImages _instance = ConfigImages._internal();
 
-  factory Images() {
+  factory ConfigImages() {
     return _instance;
   }
 
-  Images._internal();
+  ConfigImages._internal();
 }

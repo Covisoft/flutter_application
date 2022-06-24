@@ -1,8 +1,6 @@
 import 'package:flutter_app/models/model.dart';
 import 'package:uuid/uuid.dart';
 
-import 'api.dart';
-
 class APIAuthentication {
   static Future<ResultModel> requestLogin(params) async {
     // final result = await Api.httpManager.post(url: Api.login, data: params);
@@ -13,7 +11,6 @@ class APIAuthentication {
         "token": const Uuid().v4(),
       }
     };
-
     return ResultModel.fromJson(result);
   }
 

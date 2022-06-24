@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/repository/repository.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,6 +12,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     _mapEventToState();
   }
   _mapEventToState() {
+    on<LoginInitiated>((event, emit) {
+      emit(LoginState.initial());
+    });
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmitted>(_onSubmitted);

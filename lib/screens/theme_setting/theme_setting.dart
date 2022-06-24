@@ -73,14 +73,14 @@ class _ThemeSettingState extends State<ThemeSetting> {
           ),
           actions: <Widget>[
             AppButton(
-              Translate.of(context).translate('close'),
+              text: Translate.of(context).translate('close'),
               onPressed: () {
                 Navigator.pop(context);
               },
               type: ButtonType.text,
             ),
             AppButton(
-              Translate.of(context).translate('apply'),
+              text: Translate.of(context).translate('apply'),
               onPressed: () {
                 Navigator.pop(context, selected);
               },
@@ -121,7 +121,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       itemBuilder: (context, index) {
         Widget trailing = Container();
-        final item = AppTheme.themeSupport[index];
+        final item = ConfigAppTheme.themeSupport[index];
         if (item.name == currentTheme.name) {
           trailing = Icon(
             Icons.check,
@@ -142,10 +142,10 @@ class _ThemeSettingState extends State<ThemeSetting> {
               currentTheme = item;
             });
           },
-          border: item != AppTheme.themeSupport.last,
+          border: item != ConfigAppTheme.themeSupport.last,
         );
       },
-      itemCount: AppTheme.themeSupport.length,
+      itemCount: ConfigAppTheme.themeSupport.length,
     );
     if (custom) {
       content = Padding(
@@ -229,7 +229,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
         elevation: 0,
         actions: [
           AppButton(
-            Translate.of(context).translate('apply'),
+            text: Translate.of(context).translate('apply'),
             onPressed: onChange,
             type: ButtonType.text,
           ),

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/models/model.dart';
@@ -38,11 +37,11 @@ class UserCubit extends Cubit<UserModel?> {
     UserModel? user = await UserRepository.getUser();
     if (user != null) {
       ///Attach token push
-      Application.setDeviceToken();
+      ConfigApplication.setDeviceToken();
 
       ///Trick Offline get token issue firebase
       double delay = 0.0;
-      while (Application.device?.token == null && delay <= 2) {
+      while (ConfigApplication.device?.token == null && delay <= 2) {
         await Future.delayed(const Duration(milliseconds: 500));
         delay += 0.25;
       }

@@ -11,7 +11,7 @@ class UserRepository {
   static Future<void> saveUser({required UserModel user}) async {
     user.setActive(true);
     await UtilPreferences.setString(
-        Preferences.rememberUser, jsonEncode(user.toDatabase()));
+        ConfigPreferences.rememberUser, jsonEncode(user.toDatabase()));
   }
 
   ///Get User
@@ -29,7 +29,7 @@ class UserRepository {
   }
 
   static Future<UserModel?> getUser() async {
-    var result = UtilPreferences.getString(Preferences.rememberUser);
+    var result = UtilPreferences.getString(ConfigPreferences.rememberUser);
     if (result != null) {
       var user = UserModel.fromDatabase(jsonDecode(result));
       return user;

@@ -4,7 +4,7 @@ import 'package:flutter_app/common/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class LanguageCubit extends Cubit<Locale> {
-  LanguageCubit() : super(AppLanguage.defaultLanguage);
+  LanguageCubit() : super(ConfigAppLanguage.defaultLanguage);
 
   ///On Change Language
   void onUpdate(Locale locale) {
@@ -12,7 +12,7 @@ class LanguageCubit extends Cubit<Locale> {
 
     ///Preference save
     UtilPreferences.setString(
-      Preferences.language,
+      ConfigPreferences.language,
       locale.languageCode,
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppLanguage {
+class ConfigAppLanguage {
   ///Default Language
   static const Locale defaultLanguage = Locale("en");
 
@@ -11,11 +11,11 @@ class AppLanguage {
   ];
 
   ///Singleton factory
-  static final AppLanguage _instance = AppLanguage._internal();
+  static final ConfigAppLanguage _instance = ConfigAppLanguage._internal();
 
-  factory AppLanguage() {
+  factory ConfigAppLanguage() {
     return _instance;
   }
 
-  AppLanguage._internal();
+  ConfigAppLanguage._internal();
 }

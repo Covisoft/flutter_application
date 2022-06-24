@@ -21,13 +21,13 @@ class ApplicationCubit extends Cubit<ApplicationState> {
     await Firebase.initializeApp();
 
     ///Setup SharedPreferences
-    await Preferences.setPreferences();
+    await ConfigPreferences.setPreferences();
 
     ///Read/Save Device Information
-    await Application.setDevice();
+    await ConfigApplication.setDevice();
 
     ///Get old Theme & Font & Language
-    final oldTimeZone = UtilPreferences.getBool(Preferences.localTimeZone);
+    final oldTimeZone = UtilPreferences.getBool(ConfigPreferences.localTimeZone);
 
     DarkOption? darkOption;
     String? font;
@@ -35,12 +35,12 @@ class ApplicationCubit extends Cubit<ApplicationState> {
 
     ///Set timezone
     if (oldTimeZone == false) {
-      Application.localTimeZone = false;
+      ConfigApplication.localTimeZone = false;
     }
 
     ///Setup Language
     if (CmsConstants.multipleLanguages) {
-      final oldLanguage = UtilPreferences.getString(Preferences.language);
+      final oldLanguage = UtilPreferences.getString(ConfigPreferences.language);
       if (oldLanguage != null) {
         AppBloc.languageCubit.onUpdate(Locale(oldLanguage));
       }
@@ -48,9 +48,9 @@ class ApplicationCubit extends Cubit<ApplicationState> {
 
     ///Find font support available [Dart null safety issue]
     if (CmsConstants.multipleFonts) {
-      final oldFont = UtilPreferences.getString(Preferences.font);
+      final oldFont = UtilPreferences.getString(ConfigPreferences.font);
       try {
-        font = AppTheme.fontSupport.firstWhere((item) {
+        font = ConfigAppTheme.fontSupport.firstWhere((item) {
           return item == oldFont;
         });
       } catch (e) {
@@ -59,8 +59,8 @@ class ApplicationCubit extends Cubit<ApplicationState> {
     }
 
     if (CmsConstants.multipleThemes) {
-      final oldTheme = UtilPreferences.getString(Preferences.theme);
-      final oldDarkOption = UtilPreferences.getString(Preferences.darkOption);
+      final oldTheme = UtilPreferences.getString(ConfigPreferences.theme);
+      final oldDarkOption = UtilPreferences.getString(ConfigPreferences.darkOption);
       if (oldTheme != null) {
         try {
           theme = ThemeModel.fromJson(jsonDecode(oldTheme));
@@ -99,9 +99,9 @@ class ApplicationCubit extends Cubit<ApplicationState> {
   ///On Change Timezone
   void onChangeTimeZone(bool localTimeZone) async {
     emit(ApplicationState.loading);
-    Application.localTimeZone = localTimeZone;
+    ConfigApplication.localTimeZone = localTimeZone;
     await UtilPreferences.setBool(
-      Preferences.localTimeZone,
+      ConfigPreferences.localTimeZone,
       localTimeZone,
     );
     await Future.delayed(const Duration(milliseconds: 500));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/configs/config.dart';
 
 enum TagType { status, chip, rateSmall }
 
@@ -37,7 +38,7 @@ class AppTag extends StatelessWidget {
             ),
             child: Text(
               text,
-              style: Theme.of(context).textTheme.caption!.copyWith(
+              style: ConfigText.textTheme.caption!.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),

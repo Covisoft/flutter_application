@@ -346,7 +346,6 @@ abstract class AuthenticationLogoutRequested implements AuthenticationEvent {
 /// @nodoc
 mixin _$AuthenticationState {
   AuthenticationStatus get status => throw _privateConstructorUsedError;
-  UserModel? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthenticationStateCopyWith<AuthenticationState> get copyWith =>
@@ -358,7 +357,7 @@ abstract class $AuthenticationStateCopyWith<$Res> {
   factory $AuthenticationStateCopyWith(
           AuthenticationState value, $Res Function(AuthenticationState) then) =
       _$AuthenticationStateCopyWithImpl<$Res>;
-  $Res call({AuthenticationStatus status, UserModel? user});
+  $Res call({AuthenticationStatus status});
 }
 
 /// @nodoc
@@ -373,17 +372,12 @@ class _$AuthenticationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
-    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as AuthenticationStatus,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
     ));
   }
 }
@@ -395,7 +389,7 @@ abstract class _$$_AuthenticationStateCopyWith<$Res>
           $Res Function(_$_AuthenticationState) then) =
       __$$_AuthenticationStateCopyWithImpl<$Res>;
   @override
-  $Res call({AuthenticationStatus status, UserModel? user});
+  $Res call({AuthenticationStatus status});
 }
 
 /// @nodoc
@@ -412,17 +406,12 @@ class __$$_AuthenticationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
-    Object? user = freezed,
   }) {
     return _then(_$_AuthenticationState(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as AuthenticationStatus,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel?,
     ));
   }
 }
@@ -430,19 +419,16 @@ class __$$_AuthenticationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthenticationState extends _AuthenticationState {
-  const _$_AuthenticationState(
-      {this.status = AuthenticationStatus.unknown, this.user})
+  const _$_AuthenticationState({this.status = AuthenticationStatus.unknown})
       : super._();
 
   @override
   @JsonKey()
   final AuthenticationStatus status;
-  @override
-  final UserModel? user;
 
   @override
   String toString() {
-    return 'AuthenticationState(status: $status, user: $user)';
+    return 'AuthenticationState(status: $status)';
   }
 
   @override
@@ -450,15 +436,12 @@ class _$_AuthenticationState extends _AuthenticationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AuthenticationState &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
@@ -468,15 +451,12 @@ class _$_AuthenticationState extends _AuthenticationState {
 }
 
 abstract class _AuthenticationState extends AuthenticationState {
-  const factory _AuthenticationState(
-      {final AuthenticationStatus status,
-      final UserModel? user}) = _$_AuthenticationState;
+  const factory _AuthenticationState({final AuthenticationStatus status}) =
+      _$_AuthenticationState;
   const _AuthenticationState._() : super._();
 
   @override
   AuthenticationStatus get status => throw _privateConstructorUsedError;
-  @override
-  UserModel? get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_AuthenticationStateCopyWith<_$_AuthenticationState> get copyWith =>

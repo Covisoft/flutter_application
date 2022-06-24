@@ -18,7 +18,7 @@ class UtilOther {
   static exportMarketIcon(String market) {
     switch (market) {
       default:
-        return Images.defaultImage;
+        return ConfigImages.defaultImage;
     }
   }
 

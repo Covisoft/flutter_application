@@ -16,7 +16,7 @@ class HTTPManager {
     ///Dio internal
     dioInternal = Dio(
       BaseOptions(
-        baseUrl: Application.baseUrl,
+        baseUrl: ConfigApplication.baseUrl,
         connectTimeout: 10000,
         receiveTimeout: 10000,
         responseType: ResponseType.json,
@@ -26,7 +26,7 @@ class HTTPManager {
     ///Dio external
     dioExternal = Dio(
       BaseOptions(
-        baseUrl: Application.domain,
+        baseUrl: ConfigApplication.domain,
         connectTimeout: 10000,
         receiveTimeout: 10000,
         responseType: ResponseType.json,
@@ -40,7 +40,7 @@ class HTTPManager {
       Map<String, dynamic>? data,
       Options? options}) async {
     Dio request = dioInternal;
-    if (Application.external) {
+    if (ConfigApplication.external) {
       request = dioExternal;
     }
     try {
@@ -84,7 +84,7 @@ class HTTPManager {
       Map<String, dynamic>? data,
       Options? options}) async {
     Dio request = dioInternal;
-    if (Application.external) {
+    if (ConfigApplication.external) {
       request = dioExternal;
     }
     try {

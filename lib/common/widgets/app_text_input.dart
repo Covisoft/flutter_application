@@ -51,12 +51,14 @@ class _AppTextInputState extends State<AppTextInput> {
     if (widget.keyboardType == TextInputType.phone) {
       return UtilValidator.validate(
         text!,
+         context: context,
         type: ValidateType.phone,
       );
     }
     if (widget.keyboardType == TextInputType.emailAddress) {
       return UtilValidator.validate(
         text!,
+        context: context,
         type: ValidateType.email,
       );
     }
@@ -77,27 +79,29 @@ class _AppTextInputState extends State<AppTextInput> {
         ),
       );
     }
-    if (widget.controller!.text.isNotEmpty) {
-      return GestureDetector(
-        dragStartBehavior: DragStartBehavior.down,
-        onTap: () {
-          widget.controller!.text = '';
-        },
-        child: const Icon(Icons.clear),
-      );
+    if (widget.controller != null) {
+      if (widget.controller!.text.isNotEmpty) {
+        return GestureDetector(
+          dragStartBehavior: DragStartBehavior.down,
+          onTap: () {
+            widget.controller!.text = '';
+          },
+          child: const Icon(Icons.clear),
+        );
+      }
     }
+
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
       child: TextFormField(
         controller: widget.controller,
         obscureText: obscureText!,
         maxLength: widget.maxLength,
-        maxLines: widget.maxLines,
+        maxLines: widget.obscureText ? 1 : widget.maxLines,
         keyboardType: widget.keyboardType,
         validator: validateField,
         onFieldSubmitted: widget.onFieldSubmitted,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/configs/config.dart';
 
 class AppPickerItem extends StatelessWidget {
   final String title;
@@ -21,7 +22,7 @@ class AppPickerItem extends StatelessWidget {
     Color color = Theme.of(context).hintColor;
     String titlePicker = title;
     if (value != null && value!.isNotEmpty) {
-      color = Theme.of(context).textTheme.subtitle1!.color!;
+      color = ConfigText.textTheme.subtitle1!.color!;
       titlePicker = value!;
     }
 

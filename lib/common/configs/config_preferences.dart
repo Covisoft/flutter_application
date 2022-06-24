@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Preferences {
+class ConfigPreferences {
   static SharedPreferences? instance;
 
   static const String resetDB = 'resetDB';
@@ -18,11 +18,11 @@ class Preferences {
   }
 
   ///Singleton factory
-  static final Preferences _instance = Preferences._internal();
+  static final ConfigPreferences _instance = ConfigPreferences._internal();
 
-  factory Preferences() {
+  factory ConfigPreferences() {
     return _instance;
   }
 
-  Preferences._internal();
+  ConfigPreferences._internal();
 }

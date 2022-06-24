@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_app/common/utils/utils.dart';
+
 enum ValidateType {
   email,
   password,
@@ -14,6 +17,7 @@ class UtilValidator {
 
   static validate(
     String data, {
+    required BuildContext context,
     required ValidateType type,
     int? min,
     int? max,
@@ -21,7 +25,7 @@ class UtilValidator {
   }) {
     ///Empty
     if (!allowEmpty && data.isEmpty) {
-      return errorEmpty;
+      return Translate.of(context).translate(errorEmpty);
     }
 
     switch (type) {
@@ -31,7 +35,7 @@ class UtilValidator {
         final RegExp emailRegex = RegExp(
             r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
         if (!emailRegex.hasMatch(data)) {
-          return errorEmail;
+          return Translate.of(context).translate(errorEmail);
         }
         return null;
       case ValidateType.phone:
@@ -39,7 +43,7 @@ class UtilValidator {
         ///Phone pattern
         final RegExp phoneRegex = RegExp(r'^[0-9]*$');
         if (!phoneRegex.hasMatch(data)) {
-          return errorPhone;
+          return Translate.of(context).translate(errorPhone);
         }
         return null;
 
