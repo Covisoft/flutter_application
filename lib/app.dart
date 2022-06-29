@@ -35,71 +35,63 @@ class _AppState extends State<App> {
       providers: AppBloc.providers,
       child: BlocBuilder<LanguageCubit, Locale>(
         builder: (context, locale) {
-          return BlocBuilder<ThemeCubit, ThemeState>(
-            builder: (context, theme) {
-              return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                builder: (context, auth) {
-                  return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    theme: theme.lightTheme,
-                    darkTheme: theme.darkTheme,
-                    onGenerateRoute: ConfigRoutes.generateRoute,
-                    locale: locale,
-                    localizationsDelegates: const [
-                      Translate.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: ConfigAppLanguage.supportLanguage,
-                    builder: DevicePreview.appBuilder,
-                    home: Scaffold(
-                      body: BlocListener<MessageBloc, MessageState>(
-                        listener: (context, message) {
-                          if (message.status == MessageStatus.show) {
-                            SnackBarAction? barAction;
-                            if (message.action != null) {
-                              barAction = SnackBarAction(
-                                label: Translate.of(context).translate(
-                                  message.action!,
-                                ),
-                                onPressed: message.onPressed!,
-                              );
-                            }
-                            final snackBar = SnackBar(
-                              content: Text(
-                                Translate.of(context).translate(
-                                  message.text,
-                                ),
-                              ),
-                              action: barAction,
-                              duration: Duration(
-                                seconds: message.duration ?? 1,
-                              ),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
+          return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, auth) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                onGenerateRoute: ConfigRoutes.generateRoute,
+                locale: locale,
+                localizationsDelegates: const [
+                  Translate.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: ConfigAppLanguage.supportLanguage,
+                builder: DevicePreview.appBuilder,
+                home: Scaffold(
+                  body: BlocListener<MessageBloc, MessageState>(
+                    listener: (context, message) {
+                      if (message.status == MessageStatus.show) {
+                        SnackBarAction? barAction;
+                        if (message.action != null) {
+                          barAction = SnackBarAction(
+                            label: Translate.of(context).translate(
+                              message.action!,
+                            ),
+                            onPressed: message.onPressed!,
+                          );
+                        }
+                        final snackBar = SnackBar(
+                          content: Text(
+                            Translate.of(context).translate(
+                              message.text,
+                            ),
+                          ),
+                          action: barAction,
+                          duration: Duration(
+                            seconds: message.duration ?? 1,
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    child: BlocBuilder<ApplicationCubit, ApplicationState>(
+                      builder: (context, application) {
+                        ConfigSize().init(context);
+                        if (application == ApplicationState.completed) {
+                          if (auth.status ==
+                              AuthenticationStatus.authenticated) {
+                            return const AppContainer();
+                          } else {
+                            return const SignIn();
                           }
-                        },
-                        child: BlocBuilder<ApplicationCubit, ApplicationState>(
-                          builder: (context, application) {
-                            ConfigSize().init(context);
-                            ConfigText().init(context);
-                            if (application == ApplicationState.completed) {
-                              if (auth.status ==
-                                  AuthenticationStatus.authenticated) {
-                                return const AppContainer();
-                              } else {
-                                return const SignIn();
-                              }
-                            }
-                            return const SplashScreen();
-                          },
-                        ),
-                      ),
+                        }
+                        return const SplashScreen();
+                      },
                     ),
-                  );
-                },
+                  ),
+                ),
               );
             },
           );

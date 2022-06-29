@@ -88,7 +88,7 @@ class _AccountState extends State<Account> {
               IconButton(
                 icon: Icon(
                   Icons.logout,
-                  color: Theme.of(context).primaryColor,
+                  color: ConfigColor.primary,
                 ),
                 onPressed: onLogout,
               ),
@@ -104,7 +104,7 @@ class _AccountState extends State<Account> {
                     title: Translate.of(context).translate('setting'),
                     leading: Icon(
                       Icons.settings_outlined,
-                      color: Theme.of(context).primaryColor,
+                      color: ConfigColor.primary,
                     ),
                     onPressed: () {
                       onNavigate(ConfigRoutes.setting);

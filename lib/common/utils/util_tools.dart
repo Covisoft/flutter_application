@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/configs/config_color.dart';
 
 class Tools {
   static Future<void> showInfoSnackBar(
@@ -14,13 +15,13 @@ class Tools {
     await Flushbar(
       message: message,
       duration: duration,
-      messageColor: Theme.of(context).primaryColor,
+      messageColor: ConfigColor.primary,
       borderRadius: BorderRadius.circular(10),
       title: title,
       margin: margin,
       backgroundColor: isError
-          ? Theme.of(context).errorColor
-          : Theme.of(context).primaryColor,
+          ? ConfigColor.error
+          : ConfigColor.primary,
       flushbarPosition: position,
     ).show(context);
   }

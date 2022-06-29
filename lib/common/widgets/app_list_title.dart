@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/configs/config.dart';
 
 class AppListTitle extends StatelessWidget {
   final String title;
@@ -37,7 +38,7 @@ class AppListTitle extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyText2!
-              .copyWith(color: Theme.of(context).primaryColor),
+              .copyWith(color: ConfigColor.primary),
         ),
       );
     }

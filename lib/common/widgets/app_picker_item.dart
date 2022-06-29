@@ -19,10 +19,10 @@ class AppPickerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Theme.of(context).hintColor;
+    Color color = ConfigColor.textHint;
     String titlePicker = title;
     if (value != null && value!.isNotEmpty) {
-      color = ConfigText.textTheme.subtitle1!.color!;
+      color =  ConfigText.subtitle.color!;
       titlePicker = value!;
     }
 

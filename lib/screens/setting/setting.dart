@@ -19,7 +19,6 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   bool localTimeZone = false;
-  DarkOption darkOption = DarkOption.dynamic;
   bool pushNotification = false;
   Timer? debounce;
 
@@ -28,7 +27,6 @@ class _SettingState extends State<Setting> {
     super.initState();
 
     localTimeZone = ConfigApplication.localTimeZone;
-    darkOption = AppBloc.themeCubit.state.darkOption;
   }
 
   @override
@@ -39,11 +37,6 @@ class _SettingState extends State<Setting> {
 
   ///Save and Sync setting
   void syncSetting() {}
-
-  ///On Change Dark Option
-  void onChangeDarkOption() {
-    AppBloc.themeCubit.onChangeTheme(darkOption: darkOption);
-  }
 
   ///On Change Dark Option
   void onChangeLocalTimeZone(bool value) async {
@@ -67,14 +60,14 @@ class _SettingState extends State<Setting> {
           ),
           actions: <Widget>[
             AppButton(
-             text: Translate.of(context).translate('close'),
+              text: Translate.of(context).translate('close'),
               onPressed: () {
                 Navigator.pop(context, false);
               },
               type: ButtonType.text,
             ),
             AppButton(
-              text:Translate.of(context).translate('apply'),
+              text: Translate.of(context).translate('apply'),
               onPressed: () {
                 Navigator.pop(context, true);
               },
@@ -97,95 +90,6 @@ class _SettingState extends State<Setting> {
   ///On navigation
   void onNavigate(String route) {
     Navigator.pushNamed(context, route);
-  }
-
-  ///Show dark theme setting
-  void showDarkModeSetting() async {
-    final result = await showDialog<bool>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        darkOption = AppBloc.themeCubit.state.darkOption;
-        return AlertDialog(
-          title: Text(Translate.of(context).translate('dark_mode')),
-          content: StatefulBuilder(
-            builder: (context, setState) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    RadioListTile<DarkOption>(
-                      title: Text(
-                        Translate.of(context).translate(
-                          UtilTheme.langDarkOption(DarkOption.dynamic),
-                        ),
-                      ),
-                      activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.dynamic,
-                      groupValue: darkOption,
-                      onChanged: (value) {
-                        setState(() {
-                          darkOption = DarkOption.dynamic;
-                        });
-                      },
-                    ),
-                    RadioListTile<DarkOption>(
-                      title: Text(
-                        Translate.of(context).translate(
-                          UtilTheme.langDarkOption(DarkOption.alwaysOn),
-                        ),
-                      ),
-                      activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.alwaysOn,
-                      groupValue: darkOption,
-                      onChanged: (value) {
-                        setState(() {
-                          darkOption = DarkOption.alwaysOn;
-                        });
-                      },
-                    ),
-                    RadioListTile<DarkOption>(
-                      title: Text(
-                        Translate.of(context).translate(
-                          UtilTheme.langDarkOption(DarkOption.alwaysOff),
-                        ),
-                      ),
-                      activeColor: Theme.of(context).primaryColor,
-                      value: DarkOption.alwaysOff,
-                      groupValue: darkOption,
-                      onChanged: (value) {
-                        setState(() {
-                          darkOption = DarkOption.alwaysOff;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          actions: <Widget>[
-            AppButton(
-             text: Translate.of(context).translate('close'),
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              type: ButtonType.text,
-            ),
-            AppButton(
-              text:Translate.of(context).translate('apply'),
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-            ),
-          ],
-        );
-      },
-    );
-    if (result == true) {
-      onChangeDarkOption();
-    } else {
-      darkOption = AppBloc.themeCubit.state.darkOption;
-    }
   }
 
   @override
@@ -212,7 +116,7 @@ class _SettingState extends State<Setting> {
                 AppListTitle(
                   leading: Icon(
                     Icons.language_outlined,
-                    color: Theme.of(context).primaryColor,
+                    color: ConfigColor.primary,
                   ),
                   title: Translate.of(context).translate('language'),
                   onPressed: () {
@@ -224,7 +128,7 @@ class _SettingState extends State<Setting> {
                         UtilLanguage.getGlobalLanguageName(
                           AppBloc.languageCubit.state.languageCode,
                         ),
-                        style: ConfigText.textTheme.caption,
+                        style: ConfigText.subtitle,
                       ),
                       const Icon(Icons.keyboard_arrow_right),
                     ],
@@ -233,24 +137,24 @@ class _SettingState extends State<Setting> {
                 AppListTitle(
                   leading: Icon(
                     Icons.more_time,
-                    color: Theme.of(context).primaryColor,
+                    color: ConfigColor.primary,
                   ),
                   title: Translate.of(context).translate('local_timezone'),
                   trailing: CupertinoSwitch(
                     value: localTimeZone,
-                    activeColor: Theme.of(context).primaryColor,
+                    activeColor: ConfigColor.primary,
                     onChanged: onChangeLocalTimeZone,
                   ),
                 ),
                 AppListTitle(
                   leading: Icon(
                     Icons.notifications_active_outlined,
-                    color: Theme.of(context).primaryColor,
+                    color: ConfigColor.primary,
                   ),
                   title: Translate.of(context).translate('notification'),
                   trailing: CupertinoSwitch(
                     value: pushNotification,
-                    activeColor: Theme.of(context).primaryColor,
+                    activeColor: ConfigColor.primary,
                     onChanged: (value) {
                       setState(() {
                         pushNotification = value;
@@ -258,61 +162,6 @@ class _SettingState extends State<Setting> {
                       syncSetting();
                     },
                   ),
-                ),
-                AppListTitle(
-                  leading: Icon(
-                    Icons.color_lens_outlined,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  title: Translate.of(context).translate('theme'),
-                  onPressed: () {
-                    onNavigate(ConfigRoutes.themeSetting);
-                  },
-                  trailing: Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    width: 16,
-                    height: 16,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                AppListTitle(
-                  leading: Icon(
-                    Icons.nights_stay_outlined,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  title: Translate.of(context).translate('dark_mode'),
-                  onPressed: showDarkModeSetting,
-                  trailing: Row(
-                    children: <Widget>[
-                      Text(
-                        Translate.of(context).translate(
-                          UtilTheme.langDarkOption(darkOption),
-                        ),
-                        style: ConfigText.textTheme.caption,
-                      ),
-                      const Icon(Icons.keyboard_arrow_right),
-                    ],
-                  ),
-                ),
-                AppListTitle(
-                  leading: Icon(
-                    Icons.font_download_outlined,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  title: Translate.of(context).translate('font'),
-                  onPressed: () {
-                    onNavigate(ConfigRoutes.fontSetting);
-                  },
-                  trailing: Row(
-                    children: <Widget>[
-                      Text(
-                        AppBloc.themeCubit.state.font ?? defaultFont,
-                        style: ConfigText.textTheme.caption,
-                      ),
-                      const Icon(Icons.keyboard_arrow_right),
-                    ],
-                  ),
-                  border: false,
                 ),
               ]),
             ),

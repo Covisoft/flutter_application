@@ -29,7 +29,7 @@ class AppTag extends StatelessWidget {
               vertical: 2,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: ConfigColor.primary,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(4),
                 bottomLeft: Radius.circular(4),
@@ -38,10 +38,7 @@ class AppTag extends StatelessWidget {
             ),
             child: Text(
               text,
-              style: ConfigText.textTheme.caption!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: ConfigText.subtitle,
             ),
           ),
         );
@@ -55,7 +52,7 @@ class AppTag extends StatelessWidget {
               vertical: 2,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: ConfigColor.primary,
               borderRadius: BorderRadius.circular(2),
             ),
             child: Text(

@@ -1,3 +1,4 @@
+import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/common/widgets/widget.dart';
 import 'package:flutter_app/models/model.dart';
 
@@ -56,7 +57,7 @@ class _PickerScreenState extends State<PickerScreen> {
                     if (item.value == widget.picker.selected.value) {
                       checked = Icon(
                         Icons.check,
-                        color: Theme.of(context).primaryColor,
+                        color: ConfigColor.primary,
                       );
                     }
                     return AppListTitle(

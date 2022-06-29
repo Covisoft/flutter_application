@@ -97,7 +97,7 @@ class _LanguageSettingState extends State<LanguageSetting> {
                   if (item == languageSelected) {
                     trailing = Icon(
                       Icons.check,
-                      color: Theme.of(context).primaryColor,
+                      color: ConfigColor.primary,
                     );
                   }
                   return AppListTitle(

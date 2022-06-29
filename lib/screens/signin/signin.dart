@@ -61,7 +61,8 @@ class _SignInState extends State<SignIn> {
                             padding: const EdgeInsets.all(24),
                             child: Text(
                               Translate.of(context).translate('app_slogan'),
-                              style: ConfigText.textTheme.bodyText2,
+                              style: ConfigText.headline6
+                                  .copyWith(color: ConfigColor.primary),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -88,7 +89,8 @@ class _SignInState extends State<SignIn> {
                 const SizedBox(height: 8),
                 Text(
                   Translate.of(context).translate('app_noted'),
-                  style: ConfigText.textTheme.caption,
+                  style:
+                      ConfigText.subtitle.copyWith(color: ConfigColor.primary),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
@@ -112,10 +114,10 @@ class _CreateAccount extends StatelessWidget {
       text: TextSpan(children: [
         TextSpan(
             text: Translate.of(context).translate('no_have_account'),
-            style: ConfigText.textTheme.bodyText1),
+            style: ConfigText.body),
         TextSpan(
             text: Translate.of(context).translate('sign_up'),
-            style: ConfigText.primaryTextTheme.bodyText1)
+            style: ConfigText.body)
       ]),
     );
   }
@@ -132,7 +134,7 @@ class _ForgotPassword extends StatelessWidget {
       onTap: () {},
       child: Text(
         Translate.of(context).translate('forgot_password'),
-        style: ConfigText.textTheme.subtitle1,
+        style: ConfigText.subtitle.copyWith(color: ConfigColor.primary),
       ),
     );
   }
@@ -162,11 +164,13 @@ class _RememberLoginState extends State<_RememberLogin> {
           AppCheckBox(
             isChecked: rememberLogin,
             size: 21,
-            checkedFillColor: Theme.of(context).primaryColor,
-            unCheckedBorderColor: Theme.of(context).primaryColor,
+            checkedFillColor: ConfigColor.primary,
+            unCheckedBorderColor: ConfigColor.primary,
           ),
-          Text(Translate.of(context).translate('remember_login'),
-              style: ConfigText.textTheme.subtitle1),
+          Text(
+            Translate.of(context).translate('remember_login'),
+            style: ConfigText.subtitle.copyWith(color: ConfigColor.primary),
+          ),
         ],
       ),
     );
@@ -228,6 +232,8 @@ class _LoginButton extends StatelessWidget {
                 text: Translate.of(context).translate('sign_in'),
                 mainAxisSize: MainAxisSize.max,
                 disabled: !state.status.isValidated,
+                textStyle:
+                    ConfigText.button.copyWith(color: ConfigColor.primaryLight),
                 onPressed: () {
                   AppBloc.loginBloc.add(const LoginSubmitted());
                 });

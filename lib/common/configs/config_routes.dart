@@ -10,9 +10,7 @@ class ConfigRoutes {
   static const String editProfile = "/editProfile";
   static const String changePassword = "/changePassword";
   static const String changeLanguage = "/changeLanguage";
-  static const String themeSetting = "/themeSetting";
   static const String setting = "/setting";
-  static const String fontSetting = "/fontSetting";
   static const String statementFilter = "/statementFilter";
   static const String pickerScreen = "/pickerScreen";
   static const String notification = "/notification";
@@ -43,24 +41,14 @@ class ConfigRoutes {
             return const LanguageSetting();
           },
         );
-      case themeSetting:
-        return MaterialPageRoute(
-          builder: (context) {
-            return const ThemeSetting();
-          },
-        );
+
       case setting:
         return MaterialPageRoute(
           builder: (context) {
             return const Setting();
           },
         );
-      case fontSetting:
-        return MaterialPageRoute(
-          builder: (context) {
-            return const FontSetting();
-          },
-        );
+    
 
       case pickerScreen:
         final picker = settings.arguments as PickerScreenModel;

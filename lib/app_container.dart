@@ -17,7 +17,6 @@ class AppContainer extends StatefulWidget {
 
 class _AppContainerState extends State<AppContainer>
     with WidgetsBindingObserver {
-
   late StreamSubscription signSubscription;
   late StreamSubscription<RemoteMessage> onMessage;
   late StreamSubscription<RemoteMessage> onMessageOpenedApp;
@@ -64,10 +63,9 @@ class _AppContainerState extends State<AppContainer>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       body: IndexedStack(
         index: selectedIndex,
-        children: const <Widget>[DashBoard(), Account()],
+        children: const <Widget>[Home(), Account()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [

@@ -10,7 +10,6 @@ class AppBloc {
 
   static final applicationCubit = ApplicationCubit();
   static final languageCubit = LanguageCubit();
-  static final themeCubit = ThemeCubit();
   static final userCubit = UserCubit();
   static final messageBloc = MessageBloc();
   static final authenticationBloc = AuthenticationBloc();
@@ -22,9 +21,6 @@ class AppBloc {
     ),
     BlocProvider<LanguageCubit>(
       create: (context) => languageCubit,
-    ),
-    BlocProvider<ThemeCubit>(
-      create: (context) => themeCubit,
     ),
 
     BlocProvider<LoginBloc>(
@@ -44,7 +40,6 @@ class AppBloc {
   static void dispose() {
     applicationCubit.close();
     languageCubit.close();
-    themeCubit.close();
     messageBloc.close();
   }
 

@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
+      color: ConfigColor.primary,
       alignment: Alignment.center,
       child: Stack(
         alignment: Alignment.center,

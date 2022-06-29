@@ -5,7 +5,6 @@ export 'util_language.dart';
 export 'util_logger.dart';
 export 'util_other.dart';
 export 'util_preferences.dart';
-export 'util_theme.dart';
 export 'util_timezone.dart';
 export 'util_translate.dart';
 export 'validate.dart';

@@ -61,7 +61,7 @@ class _BodyWidget extends StatelessWidget {
           title: Translate.of(context).translate('setting'),
           leading: Icon(
             Icons.settings_outlined,
-            color: Theme.of(context).primaryColor,
+            color: ConfigColor.primary,
           ),
           onPressed: () {
             onNavigate(ConfigRoutes.setting);
@@ -70,7 +70,7 @@ class _BodyWidget extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.keyboard_arrow_right,
-                color: Theme.of(context).primaryColor,
+                color: ConfigColor.primary,
               ),
             ],
           ),
@@ -135,7 +135,7 @@ class _SignOutButton extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.logout,
-                color: Theme.of(context).primaryColor,
+                color: ConfigColor.primary,
               ),
             ],
           ),
