@@ -12,6 +12,8 @@ enum ApplicationState { loading, completed }
 class ApplicationCubit extends Cubit<ApplicationState> {
   ApplicationCubit() : super(ApplicationState.loading);
 
+
+
   ///On Setup Application
   void onSetup() async {
     ///Firebase init
@@ -39,6 +41,9 @@ class ApplicationCubit extends Cubit<ApplicationState> {
         AppBloc.languageCubit.onUpdate(Locale(oldLanguage));
       }
     }
+    final firstOpenApp =
+        UtilPreferences.getBool(ConfigPreferences.firstOpenApp);
+      
 
     if (CmsConstants.rememberLogin) await AppBloc.userCubit.onCheck();
 
