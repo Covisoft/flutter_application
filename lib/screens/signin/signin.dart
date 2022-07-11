@@ -9,6 +9,7 @@ import 'package:formz/formz.dart';
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
+  static const id = "SignIn";
   @override
   _SignInState createState() {
     return _SignInState();
