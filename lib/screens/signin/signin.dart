@@ -32,10 +32,16 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Container(
+        alignment: Alignment.center,
+        width: ConfigSize.screenWidth,
+        child: SizedBox(
+          width: ConfigSize.isMobile
+              ? ConfigSize.screenWidth
+              : ConfigSize.SIZE_MOBILE_MAX_WIDTH,
+          child: Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: ConfigSize.SPACING_SIZE_2),
             child: Column(
               children: [
                 Expanded(
@@ -47,19 +53,20 @@ class _SignInState extends State<SignIn> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: 100,
-                            height: 100,
+                            width: ConfigSize.SPACING_SIZE_8,
+                            height: ConfigSize.SPACING_SIZE_8,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius:
+                                  BorderRadius.circular(ConfigSize.RADIUS_SIZE_1),
                               image: const DecorationImage(
                                 image: AssetImage(ConfigImages.icon),
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: ConfigSize.SPACING_SIZE_2),
                           Padding(
-                            padding: const EdgeInsets.all(24),
+                            padding: EdgeInsets.all(ConfigSize.SPACING_SIZE_3),
                             child: Text(
                               Translate.of(context).translate('app_slogan'),
                               style: ConfigText.headline6
@@ -68,37 +75,38 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                           _UsernameInput(),
-                          const Padding(padding: EdgeInsets.all(12)),
+                          Padding(
+                              padding: EdgeInsets.all(ConfigSize.SPACING_SIZE_2)),
                           _PasswordInput(),
-                          const Padding(padding: EdgeInsets.all(12)),
+                          Padding(
+                              padding: EdgeInsets.all(ConfigSize.SPACING_SIZE_1)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              _RememberLogin(),
-                              _ForgotPassword()
-                            ],
+                            children: const [_RememberLogin(), _ForgotPassword()],
                           ),
-                          const Padding(padding: EdgeInsets.all(12)),
+                          Padding(
+                              padding: EdgeInsets.all(ConfigSize.SPACING_SIZE_2)),
                           _LoginButton(),
-                          const Padding(padding: EdgeInsets.all(12)),
+                          Padding(
+                              padding: EdgeInsets.all(ConfigSize.SPACING_SIZE_2)),
                           const _CreateAccount()
                         ],
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: ConfigSize.SPACING_SIZE_1),
                 Text(
                   Translate.of(context).translate('app_noted'),
                   style:
                       ConfigText.subtitle.copyWith(color: ConfigColor.primary),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: ConfigSize.SPACING_SIZE_1),
               ],
             ),
           ),
-        ],
+        ),
       ),
     ));
   }
@@ -154,26 +162,28 @@ class _RememberLoginState extends State<_RememberLogin> {
   bool rememberLogin = false;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          rememberLogin = !rememberLogin;
-        });
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return InkWell(
+          onTap: () {
+            AppBloc.loginBloc.add(RememberLoginChanged(!state.rememberLogin));
+          },
+          child: Row(
+            children: [
+              AppCheckBox(
+                isChecked: state.rememberLogin,
+                size: ConfigSize.SPACING_SIZE_3,
+                checkedFillColor: ConfigColor.primary,
+                unCheckedBorderColor: ConfigColor.primary,
+              ),
+              Text(
+                Translate.of(context).translate('remember_login'),
+                style: ConfigText.subtitle.copyWith(color: ConfigColor.primary),
+              ),
+            ],
+          ),
+        );
       },
-      child: Row(
-        children: [
-          AppCheckBox(
-            isChecked: rememberLogin,
-            size: 21,
-            checkedFillColor: ConfigColor.primary,
-            unCheckedBorderColor: ConfigColor.primary,
-          ),
-          Text(
-            Translate.of(context).translate('remember_login'),
-            style: ConfigText.subtitle.copyWith(color: ConfigColor.primary),
-          ),
-        ],
-      ),
     );
   }
 }

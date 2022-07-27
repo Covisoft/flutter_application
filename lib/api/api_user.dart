@@ -1,14 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_app/models/model.dart';
+
+import 'api.dart';
 
 class APIUser {
   static Future<ResultModel> getInfoUser(String token) async {
-    await Future.delayed(const Duration(seconds: 1));
-    // final result = await httpManager.get(url: user);
-
-    final result = {
-      'success': true,
-      'data': {"id": 'idAdmin', 'username': 'admin'}
-    };
+    final result = await Api.httpManager.get(
+        url: Api.user,
+        options: Options(headers: {"Authorization": "Bearer $token"}));
     return ResultModel.fromJson(result);
   }
 }

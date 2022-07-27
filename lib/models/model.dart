@@ -5,3 +5,4 @@ export 'model_result_api.dart';
 export 'model_user_config.dart';
 export 'model_user_permission.dart';
 export 'model_user.dart';
+export 'model_language.dart';

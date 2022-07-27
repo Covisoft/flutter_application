@@ -1,59 +1,119 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
-import 'package:flutter_app/blocs/bloc.dart';
-import 'package:flutter_app/models/model.dart';
 
 class UserModel extends Equatable {
-  final String id;
-  final String username;
+  late String fullName;
+  late String phoneNumber;
+  late List<Role> roles;
+  String? avatar;
+  String? address;
+  bool? isChangedPass;
+  late String id;
   String? token;
-  bool active;
+  String? refreshToken;
+  late bool active;
+  UserModel(
+      {required this.fullName,
+      required this.phoneNumber,
+      required this.roles,
+      this.avatar,
+      this.address,
+      this.isChangedPass,
+      required this.id,  this.token,
+      this.refreshToken,
+    required this.active,});
 
-  UserModel({
-    required this.id,
-    required this.username,
-    this.token,
-    required this.active,
-  });
-  static UserModel empty = UserModel(id: '', username: '', active: false);
-
-  void setActive(bool active) {
-    this.active = active;
+void setActive(bool active) {
+  this.active = active;
+}
+void setToken(String? token) {
+  this.token = token;
+}
+void setRefreshToken(String? refreshToken) {
+  this.refreshToken = refreshToken;
+}
+  UserModel.fromJson(Map<String, dynamic> json) {
+    fullName = json['fullName'];
+    phoneNumber = json['phoneNumber'];
+    roles = <Role>[];
+    json['roles'].forEach((v) {
+      roles.add(Role.fromJson(v));
+    });
+    avatar = json['avatar'];
+    address = json['address'];
+    isChangedPass = json['isChangedPass'];
+    id = json['id'];
+    token = json['token'];
+    refreshToken = json['refreshToken'];
+    active = true;
   }
 
-  void setToken(String? token) {
-    this.token = token;
-  }
-
-
-  factory UserModel.fromJson(json) {
-    return UserModel(
-      id: json['id'],
-      username: json['username'] ?? '',
-      token: json['token'] ?? AppBloc.userCubit.state?.token,
-      active: false,
-    );
-  }
-
-  factory UserModel.fromDatabase(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'],
-      username: json['username'] ?? '',
-      token: json['token'],
-      active: json['active'] == 1,
-    );
-  }
-
-  Map<String, dynamic> toDatabase() {
-    return {
-      "id": id,
-      "username": username,
-      "token": token,
-      "active": active == true ? 1 : 0,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['fullName'] = fullName;
+    data['phoneNumber'] = phoneNumber;
+    data['roles'] = roles.map((v) => v.toJson()).toList();
+    data['avatar'] = avatar;
+    data['address'] = address;
+    data['isChangedPass'] = isChangedPass;
+    data['id'] = id;
+    data['token'] = token;
+    data['active'] = active;
+    data['refreshToken'] = refreshToken;
+    return data;
   }
 
   @override
-  List<Object?> get props => [id, username, active];
+  List<Object?> get props => [];
+}
+
+class Role extends Equatable {
+ late  String roleName;
+ late  List<Permission> permissions;
+ late  String id;
+
+  Role({required this.roleName, required this.permissions, required this.id});
+
+  Role.fromJson(Map<String, dynamic> json) {
+    roleName = json['roleName'];
+    if (json['permissions'] != null) {
+      permissions = <Permission>[];
+      json['permissions'].forEach((v) {
+        permissions.add(Permission.fromJson(v));
+      });
+    }
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['roleName'] = roleName;
+    data['permissions'] = permissions.map((v) => v.toJson()).toList();
+    data['id'] = id;
+    return data;
+  }
+
+  @override
+  List<Object?> get props => [];
+}
+
+class Permission extends Equatable {
+ late String permissionName;
+ late String id;
+
+  Permission({required this.permissionName, required this.id});
+
+  Permission.fromJson(Map<String, dynamic> json) {
+    permissionName = json['permissionName'];
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['permissionName'] = permissionName;
+    data['id'] = id;
+    return data;
+  }
+
+  @override
+  List<Object?> get props => [];
 }

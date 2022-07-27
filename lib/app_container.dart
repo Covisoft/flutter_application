@@ -2,8 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/blocs/bloc.dart';
+import 'package:flutter_app/common/utils/utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'common/utils/utils.dart';
+import 'common/configs/config.dart';
+import 'common/widgets/widget.dart';
 import 'screens/screen.dart';
 
 class AppContainer extends StatefulWidget {
@@ -20,6 +25,7 @@ class _AppContainerState extends State<AppContainer>
   late StreamSubscription signSubscription;
   late StreamSubscription<RemoteMessage> onMessage;
   late StreamSubscription<RemoteMessage> onMessageOpenedApp;
+  final PageController controller = PageController();
 
   int selectedIndex = 0;
 
@@ -38,6 +44,20 @@ class _AppContainerState extends State<AppContainer>
     WidgetsBinding.instance.addObserver(this);
   }
 
+  List<PageViewItemWidget> pageView = [
+    PageViewItemWidget(title: "dashboard", child: const DashBoardScreen()),
+    PageViewItemWidget(title: 'sale', child: const SaleScreen()),
+    PageViewItemWidget(title: 'vendor', child: const VendorScreen()),
+    PageViewItemWidget(title: 'product', child: const ProductScreen()),
+    PageViewItemWidget(
+        title: 'warehouse_management', child: const WarehouseScreen()),
+    PageViewItemWidget(
+        title: 'receipts_expenses_management',
+        child: const ReceiptsExpensesScreen()),
+    PageViewItemWidget(title: 'report', child: const ReportScreen()),
+    PageViewItemWidget(title: 'staff', child: const StaffScreen()),
+    PageViewItemWidget(title: 'setting', child: const SettingScreen()),
+  ];
   @override
   void dispose() {
     onMessage.cancel();
@@ -54,35 +74,56 @@ class _AppContainerState extends State<AppContainer>
   }
 
   ///On change tab bottom menu
-  void onItemTapped(index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+  // void onItemTapped(index) {
+  //   setState(() {
+  //     selectedIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: const <Widget>[Home(), Account()],
+      appBar: AppBar(
+        backgroundColor: ConfigColor.primary,
+        title: Text(
+            Translate.of(context).translate(pageView[selectedIndex].title),
+            style: ConfigText.headline5.copyWith(fontSize: 24.h)),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.dashboard_outlined),
-            label: Translate.of(context).translate('dashboard'),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.account_circle_outlined),
-            label: Translate.of(context).translate('account'),
-          ),
-        ],
-        selectedFontSize: 12,
-        unselectedFontSize: 10,
-        currentIndex: selectedIndex,
-        onTap: onItemTapped,
+      drawer: !ConfigSize.isWeb ? const AppDrawerMenu() : null,
+      body: BlocListener<PageViewCubit, int>(
+        listener: (context, index) {
+          controller.jumpToPage(index);
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        child: Row(
+          children: [
+            if (ConfigSize.isWeb)
+              Expanded(
+                flex: 2,
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: ConfigColor.primary.withOpacity(0.8)),
+                    child: const AppDrawerMenu()),
+              ),
+            Expanded(
+              flex: 5,
+              child: PageView(
+                controller: controller,
+                physics: const NeverScrollableScrollPhysics(),
+                children: pageView.map((e) => e.child).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class PageViewItemWidget {
+  final String title;
+  final Widget child;
+  PageViewItemWidget({required this.title, required this.child});
 }

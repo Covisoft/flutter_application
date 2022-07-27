@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfigColor {
-  static Color primary = const Color(0xff135bbd);
+  static Color primary = const Color(0xff00623B);
   static Color accent = const Color(0xffFFA104);
   static Color secondary = const Color(0xff135bbd);
   static Color primaryLight = const Color(0xffFCFDFF);
@@ -12,7 +12,7 @@ class ConfigColor {
   static Color info = const Color(0xff0075FF);
 
   ///Text Color
-  static Color textPrimary = const Color(0xff135bbd);
+  static Color textPrimary = const Color(0xff00623B);
   static Color textSecondary = const Color(0xff135bbd);
   static Color textLight = const Color(0xffFCFDFF);
   static Color textDark = const Color(0xff000E20);
@@ -22,18 +22,21 @@ class ConfigColor {
   static Color textHighlight = const Color(0xffFFA104);
 
   ///Button Color
-  static Color buttonPrimary = const Color(0xff135bbd);
+  static Color buttonPrimary = const Color(0xff00623B);
   static Color buttonLight = const Color(0xffFCFDFF);
   static Color buttonDark = const Color(0xff000E20);
   static Color buttonDisable = const Color.fromARGB(1, 19, 91, 189);
 
   ///Border Color
-  static Color border = const Color(0xff135bbd);
+  static Color border = const Color(0xff00623B);
   static Color borderLight = const Color(0xffFCFDFF);
 
   ///Icon Color
-  static Color icon = const Color(0xff135bbd);
-  static Color iconLight = const Color(0xff135bbd);
+  static Color icon = const Color(0xff00623B);
+  static Color iconLight = const Color(0xffFCFDFF);
+
+  ///Card Color
+  static Color cardPrimary = const Color(0xff00623B);
 
   ///Singleton factory
   static final ConfigColor _instance = ConfigColor._internal();

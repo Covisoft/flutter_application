@@ -21,7 +21,9 @@ mixin _$LoginEvent {
     required TResult Function() loginInitiated,
     required TResult Function(String username) loginUsernameChanged,
     required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
     required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +31,9 @@ mixin _$LoginEvent {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +41,9 @@ mixin _$LoginEvent {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +52,9 @@ mixin _$LoginEvent {
     required TResult Function(LoginInitiated value) loginInitiated,
     required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
     required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
     required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +62,9 @@ mixin _$LoginEvent {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +72,9 @@ mixin _$LoginEvent {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,7 +140,9 @@ class _$LoginInitiated implements LoginInitiated {
     required TResult Function() loginInitiated,
     required TResult Function(String username) loginUsernameChanged,
     required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
     required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
   }) {
     return loginInitiated();
   }
@@ -139,7 +153,9 @@ class _$LoginInitiated implements LoginInitiated {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
   }) {
     return loginInitiated?.call();
   }
@@ -150,7 +166,9 @@ class _$LoginInitiated implements LoginInitiated {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginInitiated != null) {
@@ -165,7 +183,9 @@ class _$LoginInitiated implements LoginInitiated {
     required TResult Function(LoginInitiated value) loginInitiated,
     required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
     required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
     required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
   }) {
     return loginInitiated(this);
   }
@@ -176,7 +196,9 @@ class _$LoginInitiated implements LoginInitiated {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
   }) {
     return loginInitiated?.call(this);
   }
@@ -187,7 +209,9 @@ class _$LoginInitiated implements LoginInitiated {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginInitiated != null) {
@@ -270,7 +294,9 @@ class _$LoginUsernameChanged implements LoginUsernameChanged {
     required TResult Function() loginInitiated,
     required TResult Function(String username) loginUsernameChanged,
     required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
     required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
   }) {
     return loginUsernameChanged(username);
   }
@@ -281,7 +307,9 @@ class _$LoginUsernameChanged implements LoginUsernameChanged {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
   }) {
     return loginUsernameChanged?.call(username);
   }
@@ -292,7 +320,9 @@ class _$LoginUsernameChanged implements LoginUsernameChanged {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginUsernameChanged != null) {
@@ -307,7 +337,9 @@ class _$LoginUsernameChanged implements LoginUsernameChanged {
     required TResult Function(LoginInitiated value) loginInitiated,
     required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
     required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
     required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
   }) {
     return loginUsernameChanged(this);
   }
@@ -318,7 +350,9 @@ class _$LoginUsernameChanged implements LoginUsernameChanged {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
   }) {
     return loginUsernameChanged?.call(this);
   }
@@ -329,7 +363,9 @@ class _$LoginUsernameChanged implements LoginUsernameChanged {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginUsernameChanged != null) {
@@ -343,7 +379,7 @@ abstract class LoginUsernameChanged implements LoginEvent {
   const factory LoginUsernameChanged(final String username) =
       _$LoginUsernameChanged;
 
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @JsonKey(ignore: true)
   _$$LoginUsernameChangedCopyWith<_$LoginUsernameChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -418,7 +454,9 @@ class _$LoginPasswordChanged implements LoginPasswordChanged {
     required TResult Function() loginInitiated,
     required TResult Function(String username) loginUsernameChanged,
     required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
     required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
   }) {
     return loginPasswordChanged(password);
   }
@@ -429,7 +467,9 @@ class _$LoginPasswordChanged implements LoginPasswordChanged {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
   }) {
     return loginPasswordChanged?.call(password);
   }
@@ -440,7 +480,9 @@ class _$LoginPasswordChanged implements LoginPasswordChanged {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginPasswordChanged != null) {
@@ -455,7 +497,9 @@ class _$LoginPasswordChanged implements LoginPasswordChanged {
     required TResult Function(LoginInitiated value) loginInitiated,
     required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
     required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
     required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
   }) {
     return loginPasswordChanged(this);
   }
@@ -466,7 +510,9 @@ class _$LoginPasswordChanged implements LoginPasswordChanged {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
   }) {
     return loginPasswordChanged?.call(this);
   }
@@ -477,7 +523,9 @@ class _$LoginPasswordChanged implements LoginPasswordChanged {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginPasswordChanged != null) {
@@ -491,9 +539,178 @@ abstract class LoginPasswordChanged implements LoginEvent {
   const factory LoginPasswordChanged(final String password) =
       _$LoginPasswordChanged;
 
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @JsonKey(ignore: true)
   _$$LoginPasswordChangedCopyWith<_$LoginPasswordChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoginChangedCopyWith<$Res> {
+  factory _$$LoginChangedCopyWith(
+          _$LoginChanged value, $Res Function(_$LoginChanged) then) =
+      __$$LoginChangedCopyWithImpl<$Res>;
+  $Res call({String password, String username});
+}
+
+/// @nodoc
+class __$$LoginChangedCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
+    implements _$$LoginChangedCopyWith<$Res> {
+  __$$LoginChangedCopyWithImpl(
+      _$LoginChanged _value, $Res Function(_$LoginChanged) _then)
+      : super(_value, (v) => _then(v as _$LoginChanged));
+
+  @override
+  _$LoginChanged get _value => super._value as _$LoginChanged;
+
+  @override
+  $Res call({
+    Object? password = freezed,
+    Object? username = freezed,
+  }) {
+    return _then(_$LoginChanged(
+      password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoginChanged implements LoginChanged {
+  const _$LoginChanged(this.password, this.username);
+
+  @override
+  final String password;
+  @override
+  final String username;
+
+  @override
+  String toString() {
+    return 'LoginEvent.loginChanged(password: $password, username: $username)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginChanged &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.username, username));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(username));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$LoginChangedCopyWith<_$LoginChanged> get copyWith =>
+      __$$LoginChangedCopyWithImpl<_$LoginChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loginInitiated,
+    required TResult Function(String username) loginUsernameChanged,
+    required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
+    required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
+  }) {
+    return loginChanged(password, username);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loginInitiated,
+    TResult Function(String username)? loginUsernameChanged,
+    TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
+    TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
+  }) {
+    return loginChanged?.call(password, username);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loginInitiated,
+    TResult Function(String username)? loginUsernameChanged,
+    TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
+    TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
+    required TResult orElse(),
+  }) {
+    if (loginChanged != null) {
+      return loginChanged(password, username);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoginInitiated value) loginInitiated,
+    required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
+    required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
+    required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
+  }) {
+    return loginChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LoginInitiated value)? loginInitiated,
+    TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
+    TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
+    TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
+  }) {
+    return loginChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoginInitiated value)? loginInitiated,
+    TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
+    TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
+    TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
+    required TResult orElse(),
+  }) {
+    if (loginChanged != null) {
+      return loginChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoginChanged implements LoginEvent {
+  const factory LoginChanged(final String password, final String username) =
+      _$LoginChanged;
+
+  String get password;
+  String get username;
+  @JsonKey(ignore: true)
+  _$$LoginChangedCopyWith<_$LoginChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -541,7 +758,9 @@ class _$LoginSubmitted implements LoginSubmitted {
     required TResult Function() loginInitiated,
     required TResult Function(String username) loginUsernameChanged,
     required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
     required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
   }) {
     return loginSubmitted();
   }
@@ -552,7 +771,9 @@ class _$LoginSubmitted implements LoginSubmitted {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
   }) {
     return loginSubmitted?.call();
   }
@@ -563,7 +784,9 @@ class _$LoginSubmitted implements LoginSubmitted {
     TResult Function()? loginInitiated,
     TResult Function(String username)? loginUsernameChanged,
     TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
     TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginSubmitted != null) {
@@ -578,7 +801,9 @@ class _$LoginSubmitted implements LoginSubmitted {
     required TResult Function(LoginInitiated value) loginInitiated,
     required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
     required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
     required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
   }) {
     return loginSubmitted(this);
   }
@@ -589,7 +814,9 @@ class _$LoginSubmitted implements LoginSubmitted {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
   }) {
     return loginSubmitted?.call(this);
   }
@@ -600,7 +827,9 @@ class _$LoginSubmitted implements LoginSubmitted {
     TResult Function(LoginInitiated value)? loginInitiated,
     TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
     TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
     TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
     required TResult orElse(),
   }) {
     if (loginSubmitted != null) {
@@ -615,10 +844,172 @@ abstract class LoginSubmitted implements LoginEvent {
 }
 
 /// @nodoc
+abstract class _$$RememberLoginChangedCopyWith<$Res> {
+  factory _$$RememberLoginChangedCopyWith(_$RememberLoginChanged value,
+          $Res Function(_$RememberLoginChanged) then) =
+      __$$RememberLoginChangedCopyWithImpl<$Res>;
+  $Res call({bool rememberLogin});
+}
+
+/// @nodoc
+class __$$RememberLoginChangedCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res>
+    implements _$$RememberLoginChangedCopyWith<$Res> {
+  __$$RememberLoginChangedCopyWithImpl(_$RememberLoginChanged _value,
+      $Res Function(_$RememberLoginChanged) _then)
+      : super(_value, (v) => _then(v as _$RememberLoginChanged));
+
+  @override
+  _$RememberLoginChanged get _value => super._value as _$RememberLoginChanged;
+
+  @override
+  $Res call({
+    Object? rememberLogin = freezed,
+  }) {
+    return _then(_$RememberLoginChanged(
+      rememberLogin == freezed
+          ? _value.rememberLogin
+          : rememberLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RememberLoginChanged implements RememberLoginChanged {
+  const _$RememberLoginChanged(this.rememberLogin);
+
+  @override
+  final bool rememberLogin;
+
+  @override
+  String toString() {
+    return 'LoginEvent.rememberLoginChanged(rememberLogin: $rememberLogin)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RememberLoginChanged &&
+            const DeepCollectionEquality()
+                .equals(other.rememberLogin, rememberLogin));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(rememberLogin));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$RememberLoginChangedCopyWith<_$RememberLoginChanged> get copyWith =>
+      __$$RememberLoginChangedCopyWithImpl<_$RememberLoginChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loginInitiated,
+    required TResult Function(String username) loginUsernameChanged,
+    required TResult Function(String password) loginPasswordChanged,
+    required TResult Function(String password, String username) loginChanged,
+    required TResult Function() loginSubmitted,
+    required TResult Function(bool rememberLogin) rememberLoginChanged,
+  }) {
+    return rememberLoginChanged(rememberLogin);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loginInitiated,
+    TResult Function(String username)? loginUsernameChanged,
+    TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
+    TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
+  }) {
+    return rememberLoginChanged?.call(rememberLogin);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loginInitiated,
+    TResult Function(String username)? loginUsernameChanged,
+    TResult Function(String password)? loginPasswordChanged,
+    TResult Function(String password, String username)? loginChanged,
+    TResult Function()? loginSubmitted,
+    TResult Function(bool rememberLogin)? rememberLoginChanged,
+    required TResult orElse(),
+  }) {
+    if (rememberLoginChanged != null) {
+      return rememberLoginChanged(rememberLogin);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoginInitiated value) loginInitiated,
+    required TResult Function(LoginUsernameChanged value) loginUsernameChanged,
+    required TResult Function(LoginPasswordChanged value) loginPasswordChanged,
+    required TResult Function(LoginChanged value) loginChanged,
+    required TResult Function(LoginSubmitted value) loginSubmitted,
+    required TResult Function(RememberLoginChanged value) rememberLoginChanged,
+  }) {
+    return rememberLoginChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LoginInitiated value)? loginInitiated,
+    TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
+    TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
+    TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
+  }) {
+    return rememberLoginChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoginInitiated value)? loginInitiated,
+    TResult Function(LoginUsernameChanged value)? loginUsernameChanged,
+    TResult Function(LoginPasswordChanged value)? loginPasswordChanged,
+    TResult Function(LoginChanged value)? loginChanged,
+    TResult Function(LoginSubmitted value)? loginSubmitted,
+    TResult Function(RememberLoginChanged value)? rememberLoginChanged,
+    required TResult orElse(),
+  }) {
+    if (rememberLoginChanged != null) {
+      return rememberLoginChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RememberLoginChanged implements LoginEvent {
+  const factory RememberLoginChanged(final bool rememberLogin) =
+      _$RememberLoginChanged;
+
+  bool get rememberLogin;
+  @JsonKey(ignore: true)
+  _$$RememberLoginChangedCopyWith<_$RememberLoginChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$LoginState {
   FormzStatus get status => throw _privateConstructorUsedError;
   Username get username => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
+  bool get rememberLogin => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith =>
@@ -630,7 +1021,11 @@ abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res>;
-  $Res call({FormzStatus status, Username username, Password password});
+  $Res call(
+      {FormzStatus status,
+      Username username,
+      Password password,
+      bool rememberLogin});
 }
 
 /// @nodoc
@@ -646,6 +1041,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
     Object? status = freezed,
     Object? username = freezed,
     Object? password = freezed,
+    Object? rememberLogin = freezed,
   }) {
     return _then(_value.copyWith(
       status: status == freezed
@@ -660,6 +1056,10 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
+      rememberLogin: rememberLogin == freezed
+          ? _value.rememberLogin
+          : rememberLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -671,7 +1071,11 @@ abstract class _$$_LoginStateCopyWith<$Res>
           _$_LoginState value, $Res Function(_$_LoginState) then) =
       __$$_LoginStateCopyWithImpl<$Res>;
   @override
-  $Res call({FormzStatus status, Username username, Password password});
+  $Res call(
+      {FormzStatus status,
+      Username username,
+      Password password,
+      bool rememberLogin});
 }
 
 /// @nodoc
@@ -689,6 +1093,7 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     Object? status = freezed,
     Object? username = freezed,
     Object? password = freezed,
+    Object? rememberLogin = freezed,
   }) {
     return _then(_$_LoginState(
       status: status == freezed
@@ -703,6 +1108,10 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
+      rememberLogin: rememberLogin == freezed
+          ? _value.rememberLogin
+          : rememberLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -711,7 +1120,10 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 class _$_LoginState implements _LoginState {
   const _$_LoginState(
-      {required this.status, required this.username, required this.password});
+      {required this.status,
+      required this.username,
+      required this.password,
+      required this.rememberLogin});
 
   @override
   final FormzStatus status;
@@ -719,10 +1131,12 @@ class _$_LoginState implements _LoginState {
   final Username username;
   @override
   final Password password;
+  @override
+  final bool rememberLogin;
 
   @override
   String toString() {
-    return 'LoginState(status: $status, username: $username, password: $password)';
+    return 'LoginState(status: $status, username: $username, password: $password, rememberLogin: $rememberLogin)';
   }
 
   @override
@@ -732,7 +1146,9 @@ class _$_LoginState implements _LoginState {
             other is _$_LoginState &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.rememberLogin, rememberLogin));
   }
 
   @override
@@ -740,7 +1156,8 @@ class _$_LoginState implements _LoginState {
       runtimeType,
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(password));
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(rememberLogin));
 
   @JsonKey(ignore: true)
   @override
@@ -752,14 +1169,17 @@ abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {required final FormzStatus status,
       required final Username username,
-      required final Password password}) = _$_LoginState;
+      required final Password password,
+      required final bool rememberLogin}) = _$_LoginState;
 
   @override
-  FormzStatus get status => throw _privateConstructorUsedError;
+  FormzStatus get status;
   @override
-  Username get username => throw _privateConstructorUsedError;
+  Username get username;
   @override
-  Password get password => throw _privateConstructorUsedError;
+  Password get password;
+  @override
+  bool get rememberLogin;
   @override
   @JsonKey(ignore: true)
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>

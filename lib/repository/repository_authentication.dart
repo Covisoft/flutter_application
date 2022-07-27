@@ -22,8 +22,9 @@ class AuthenticationRepository {
     required String username,
     required String password,
   }) async {
+    final phoneNumber = username.replaceFirst('0', '+84');
     final result = await Api.requestLogin({
-      'phoneNumber': username,
+      'phoneNumber': phoneNumber,
       'password': password,
     });
 
@@ -31,6 +32,8 @@ class AuthenticationRepository {
     if (result.success) {
       final user = await UserRepository.getUserRemote(result.data['token']);
       if (user != null) {
+        user.setToken(result.data['token']);
+        user.setRefreshToken(result.data['refreshToken']);
         await AppBloc.userCubit.onSaveUser(user);
         _controller.add(AuthenticationStatus.authenticated);
         return true;
@@ -56,7 +59,13 @@ class AuthenticationRepository {
     ///Fetch api success
     if (result.success) {
       final user = await UserRepository.getUserRemote(result.data['token']);
-      return user;
+      if (user != null) {
+        user.setToken(result.data['token']);
+        user.setRefreshToken(result.data['refreshToken']);
+        await AppBloc.userCubit.onSaveUser(user);
+        _controller.add(AuthenticationStatus.authenticated);
+        return user;
+      }
     }
 
     ///show message

@@ -7,7 +7,10 @@ class AppListTitle extends StatelessWidget {
   final Widget? leading;
   final Widget? trailing;
   final VoidCallback? onPressed;
+  final Color? backgroundColor;
   final bool border;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
 
   const AppListTitle({
     Key? key,
@@ -17,6 +20,9 @@ class AppListTitle extends StatelessWidget {
     this.trailing,
     this.onPressed,
     this.border = true,
+    this.backgroundColor,
+    this.titleStyle,
+    this.subtitleStyle,
   }) : super(key: key);
 
   @override
@@ -35,10 +41,7 @@ class AppListTitle extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8),
         child: Text(
           subtitle!,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2!
-              .copyWith(color: ConfigColor.primary),
+          style: subtitleStyle ?? ConfigText.subtitle,
         ),
       );
     }
@@ -53,7 +56,7 @@ class AppListTitle extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        color: Theme.of(context).cardColor,
+        color: backgroundColor ?? ConfigColor.cardPrimary,
         child: Row(
           children: [
             leadingWidget,
@@ -67,16 +70,14 @@ class AppListTitle extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 16),
+                        padding: EdgeInsets.symmetric(
+                            vertical: ConfigSize.SPACING_SIZE_2),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(fontWeight: FontWeight.bold),
+                              style: titleStyle ?? ConfigText.headline6,
                             ),
                             subTitle
                           ],
@@ -84,7 +85,8 @@ class AppListTitle extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ConfigSize.SPACING_SIZE_2),
                       child: trailing ?? Container(),
                     )
                   ],

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_app/blocs/bloc.dart';
 import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/common/constants/cms_constants.dart';
@@ -17,6 +18,17 @@ class ApplicationCubit extends Cubit<ApplicationState> {
   ///On Setup Application
   void onSetup() async {
     ///Firebase init
+
+    if(kIsWeb){
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(  apiKey: "AIzaSyCMkeQgQa3OJbijsKNjtuJzBTuGKGlskjM",
+            authDomain: "flutter-app-267e5.firebaseapp.com",
+            projectId: "flutter-app-267e5",
+            storageBucket: "flutter-app-267e5.appspot.com",
+            messagingSenderId: "102743028778",
+            appId: "1:102743028778:web:083003a9358a891d3a3f53")
+      );
+    }
     await Firebase.initializeApp();
 
     ///Setup SharedPreferences

@@ -49,7 +49,7 @@ class HTTPManager {
         data: data,
         options: options,
       );
-      return {'statusCode': response.statusCode, 'data': response.data};
+      return response.data;
     } on DioError catch (error) {
       return errorHandle(error);
     }
@@ -72,13 +72,13 @@ class HTTPManager {
         queryParameters: params,
         options: options,
       );
-      return {'statusCode': response.statusCode, 'data': response.data};
+      return response.data;
     } on DioError catch (error) {
       return errorHandle(error);
     }
   }
 
-  ///Post method
+  ///Put method
   Future<dynamic> put(
       {required String url,
       Map<String, dynamic>? data,
@@ -93,7 +93,29 @@ class HTTPManager {
         data: data,
         options: options,
       );
-      return {'statusCode': response.statusCode, 'data': response.data};
+      return response.data;
+    } on DioError catch (error) {
+      return errorHandle(error);
+    }
+  }
+
+  ///Delete method
+
+  Future<dynamic> delete(
+      {required String url,
+      Map<String, dynamic>? data,
+      Options? options}) async {
+    Dio request = dioInternal;
+    if (ConfigApplication.external) {
+      request = dioExternal;
+    }
+    try {
+      final response = await request.delete(
+        url,
+        data: data,
+        options: options,
+      );
+      return response.data;
     } on DioError catch (error) {
       return errorHandle(error);
     }
@@ -115,21 +137,32 @@ class HTTPManager {
     String message = "unknown_error";
     Map<String, dynamic> data = {};
 
-    switch (error.type) {
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
-        message = "request_time_out";
-        break;
+    if (error.response == null) {
+      switch (error.type) {
+        case DioErrorType.sendTimeout:
+        case DioErrorType.receiveTimeout:
+          message = "request_time_out";
+          break;
 
-      default:
-        message = "cannot_connect_server";
-        break;
+        default:
+          message = "cannot_connect_server";
+          break;
+      }
+
+      return {
+        "success": false,
+        "message": message,
+        "data": data,
+      };
+    } else {
+      if (error.response!.data == null) {
+        return {
+          "success": false,
+          "message": message,
+          "data": data,
+        };
+      }
+      return error.response!.data;
     }
-
-    return {
-      "success": false,
-      "message": message,
-      "data": data,
-    };
   }
 }

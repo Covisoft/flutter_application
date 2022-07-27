@@ -49,13 +49,28 @@ class UserCubit extends Cubit<UserModel?> {
       ///Save user
       await onSaveUser(user);
 
-      ///Refresh token
-      final result = await AuthenticationRepository.refreshToken(user.token);
-      if (result != null) {
-        ///Update user
-        await onSaveUser(result);
-        AppBloc.authenticationBloc.add(const AuthenticationStatusChanged(
-            AuthenticationStatus.authenticated));
+      // ///Refresh token
+
+      if (user.token != null) {
+        final result = await UserRepository.validateToken(user.token!);
+        if (result) {
+          ///Update user
+          final u = await onLoadUser(user.token!);
+          await onSaveUser(u!);
+          AppBloc.authenticationBloc.add(const AuthenticationStatusChanged(
+              AuthenticationStatus.authenticated));
+        } else {
+          final result1 =
+              await AuthenticationRepository.refreshToken(user.refreshToken);
+          if (result1 != null) {
+            await onSaveUser(result1);
+            AppBloc.authenticationBloc.add(const AuthenticationStatusChanged(
+                AuthenticationStatus.authenticated));
+          } else {
+            AppBloc.authenticationBloc.add(const AuthenticationStatusChanged(
+                AuthenticationStatus.unauthenticated));
+          }
+        }
       }
     } else {
       ///Notify

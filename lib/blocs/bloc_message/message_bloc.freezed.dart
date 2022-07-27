@@ -274,13 +274,13 @@ abstract class OnMessage implements MessageEvent {
       final int? duration}) = _$OnMessage;
 
   @override
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @override
-  String? get action => throw _privateConstructorUsedError;
+  String? get action;
   @override
-  VoidCallback? get onPressed => throw _privateConstructorUsedError;
+  VoidCallback? get onPressed;
   @override
-  int? get duration => throw _privateConstructorUsedError;
+  int? get duration;
   @override
   @JsonKey(ignore: true)
   _$$OnMessageCopyWith<_$OnMessage> get copyWith =>
@@ -478,15 +478,15 @@ abstract class _ShowMessage extends MessageState {
   const _ShowMessage._() : super._();
 
   @override
-  String get text => throw _privateConstructorUsedError;
+  String get text;
   @override
-  MessageStatus get status => throw _privateConstructorUsedError;
+  MessageStatus get status;
   @override
-  String? get action => throw _privateConstructorUsedError;
+  String? get action;
   @override
-  VoidCallback? get onPressed => throw _privateConstructorUsedError;
+  VoidCallback? get onPressed;
   @override
-  int? get duration => throw _privateConstructorUsedError;
+  int? get duration;
   @override
   @JsonKey(ignore: true)
   _$$_ShowMessageCopyWith<_$_ShowMessage> get copyWith =>

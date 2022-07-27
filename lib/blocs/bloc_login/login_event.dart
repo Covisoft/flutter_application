@@ -7,5 +7,8 @@ class LoginEvent with _$LoginEvent {
       LoginUsernameChanged;
   const factory LoginEvent.loginPasswordChanged(String password) =
       LoginPasswordChanged;
+        const factory LoginEvent.loginChanged(String password, String username) =
+      LoginChanged;
   const factory LoginEvent.loginSubmitted() = LoginSubmitted;
+    const factory LoginEvent.rememberLoginChanged(bool rememberLogin) = RememberLoginChanged;
 }

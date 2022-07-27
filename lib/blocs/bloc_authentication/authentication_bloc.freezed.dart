@@ -220,7 +220,7 @@ abstract class AuthenticationStatusChanged implements AuthenticationEvent {
   const factory AuthenticationStatusChanged(final AuthenticationStatus status) =
       _$AuthenticationStatusChanged;
 
-  AuthenticationStatus get status => throw _privateConstructorUsedError;
+  AuthenticationStatus get status;
   @JsonKey(ignore: true)
   _$$AuthenticationStatusChangedCopyWith<_$AuthenticationStatusChanged>
       get copyWith => throw _privateConstructorUsedError;
@@ -456,7 +456,7 @@ abstract class _AuthenticationState extends AuthenticationState {
   const _AuthenticationState._() : super._();
 
   @override
-  AuthenticationStatus get status => throw _privateConstructorUsedError;
+  AuthenticationStatus get status;
   @override
   @JsonKey(ignore: true)
   _$$_AuthenticationStateCopyWith<_$_AuthenticationState> get copyWith =>

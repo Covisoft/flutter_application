@@ -14,7 +14,7 @@ class AppBloc {
   static final messageBloc = MessageBloc();
   static final authenticationBloc = AuthenticationBloc();
   static final loginBloc = LoginBloc();
-
+  static final pageViewCubit = PageViewCubit();
   static final List<BlocProvider> providers = [
     BlocProvider<ApplicationCubit>(
       create: (context) => applicationCubit,
@@ -35,12 +35,19 @@ class AppBloc {
     BlocProvider<AuthenticationBloc>(
       create: (context) => authenticationBloc,
     ),
+    BlocProvider<PageViewCubit>(
+      create: (context) => pageViewCubit,
+    ),
   ];
 
   static void dispose() {
     applicationCubit.close();
     languageCubit.close();
     messageBloc.close();
+    authenticationBloc.close();
+    userCubit.close();
+    loginBloc.close();
+    pageViewCubit.close();
   }
 
   ///Singleton factory

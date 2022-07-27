@@ -41,6 +41,7 @@ class UtilDevice {
     } catch (error) {
       UtilLogger.log("ERROR", error);
     }
+    return null;
   }
 
   ///Singleton factory

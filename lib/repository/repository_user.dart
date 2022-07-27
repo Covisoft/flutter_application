@@ -11,7 +11,7 @@ class UserRepository {
   static Future<void> saveUser({required UserModel user}) async {
     user.setActive(true);
     await UtilPreferences.setString(
-        ConfigPreferences.rememberUser, jsonEncode(user.toDatabase()));
+        ConfigPreferences.rememberUser, jsonEncode(user.toJson()));
   }
 
   ///Get User
@@ -20,8 +20,6 @@ class UserRepository {
 
     if (result.success) {
       final user = UserModel.fromJson(result.data);
-      user.setToken(token);
-      user.setActive(true);
       return user;
     }
     AppBloc.messageBloc.add(OnMessage(message: result.message));
@@ -31,10 +29,15 @@ class UserRepository {
   static Future<UserModel?> getUser() async {
     var result = UtilPreferences.getString(ConfigPreferences.rememberUser);
     if (result != null) {
-      var user = UserModel.fromDatabase(jsonDecode(result));
+      var user = UserModel.fromJson(jsonDecode(result));
       return user;
     }
     return null;
+  }
+
+  static Future<bool> validateToken(String token) async {
+    final result = await Api.requestValidateToken(token);
+    return result.success;
   }
 
   ///Singleton factory

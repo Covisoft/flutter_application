@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/model.dart';
 import 'package:flutter_app/screens/screen.dart';
@@ -25,6 +24,7 @@ class ConfigRoutes {
   static const String report = "/report";
   static const String invoiceCheck = "/invoiceCheck";
   static const String manageAccount = "/manageAccount";
+  static const String editLanguage = "/editLanguage";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,10 +45,9 @@ class ConfigRoutes {
       case setting:
         return MaterialPageRoute(
           builder: (context) {
-            return const Setting();
+            return const SettingScreen();
           },
         );
-    
 
       case pickerScreen:
         final picker = settings.arguments as PickerScreenModel;
@@ -59,7 +58,13 @@ class ConfigRoutes {
           fullscreenDialog: true,
         );
 
-
+      case editLanguage:
+        final detailLanguage = settings.arguments as DetailLanguageArguments;
+        return MaterialPageRoute(
+          builder: (context) {
+            return DetailLanguage(locale: detailLanguage.locale);
+          },
+        );
       default:
         return MaterialPageRoute(
           builder: (context) {

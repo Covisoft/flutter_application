@@ -8,16 +8,16 @@ import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/common/utils/utils.dart';
 import 'package:flutter_app/common/widgets/widget.dart';
 
-class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+class SettingScreen extends StatefulWidget {
+  const SettingScreen({Key? key}) : super(key: key);
 
   @override
-  _SettingState createState() {
-    return _SettingState();
+  _SettingScreenState createState() {
+    return _SettingScreenState();
   }
 }
 
-class _SettingState extends State<Setting> {
+class _SettingScreenState extends State<SettingScreen> {
   bool localTimeZone = false;
   bool pushNotification = false;
   Timer? debounce;
@@ -94,31 +94,26 @@ class _SettingState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
-    String defaultFont = Translate.of(context).translate('default');
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
         ),
         slivers: [
-          SliverAppBar(
-            centerTitle: true,
-            title: Text(
-              Translate.of(context).translate('setting'),
-            ),
-            pinned: true,
-          ),
           SliverSafeArea(
             top: false,
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 const SizedBox(height: 8),
                 AppListTitle(
+                  backgroundColor: ConfigColor.buttonLight,
                   leading: Icon(
                     Icons.language_outlined,
                     color: ConfigColor.primary,
                   ),
                   title: Translate.of(context).translate('language'),
+                  titleStyle:
+                      ConfigText.headline6.copyWith(color: ConfigColor.primary),
                   onPressed: () {
                     onNavigate(ConfigRoutes.changeLanguage);
                   },
@@ -130,16 +125,20 @@ class _SettingState extends State<Setting> {
                         ),
                         style: ConfigText.subtitle,
                       ),
-                      const Icon(Icons.keyboard_arrow_right),
+                      Icon(Icons.keyboard_arrow_right,
+                          color: ConfigColor.primary),
                     ],
                   ),
                 ),
                 AppListTitle(
+                  backgroundColor: ConfigColor.buttonLight,
                   leading: Icon(
                     Icons.more_time,
                     color: ConfigColor.primary,
                   ),
                   title: Translate.of(context).translate('local_timezone'),
+                  titleStyle:
+                      ConfigText.headline6.copyWith(color: ConfigColor.primary),
                   trailing: CupertinoSwitch(
                     value: localTimeZone,
                     activeColor: ConfigColor.primary,
@@ -147,11 +146,14 @@ class _SettingState extends State<Setting> {
                   ),
                 ),
                 AppListTitle(
+                  backgroundColor: ConfigColor.buttonLight,
                   leading: Icon(
                     Icons.notifications_active_outlined,
                     color: ConfigColor.primary,
                   ),
                   title: Translate.of(context).translate('notification'),
+                  titleStyle:
+                      ConfigText.headline6.copyWith(color: ConfigColor.primary),
                   trailing: CupertinoSwitch(
                     value: pushNotification,
                     activeColor: ConfigColor.primary,

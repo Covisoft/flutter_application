@@ -18,6 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmitted>(_onSubmitted);
+    on<RememberLoginChanged>(_onRememberLoginChanged);
   }
 
   void _onUsernameChanged(
@@ -42,6 +43,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
+  void _onRememberLoginChanged(
+    RememberLoginChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(
+      rememberLogin: event.rememberLogin,
+    ));
+  }
+
   void _onSubmitted(
     LoginSubmitted event,
     Emitter<LoginState> emit,
@@ -54,6 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           password: state.password.value,
         );
         if (result) {
+        
           emit(state.copyWith(status: FormzStatus.submissionSuccess));
         } else {
           emit(state.copyWith(status: FormzStatus.submissionFailure));

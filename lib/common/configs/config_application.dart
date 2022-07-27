@@ -13,7 +13,7 @@ class ConfigApplication {
   static const String dateFormat = 'HH:mm, MMM dd yyyy';
   static const String clientID = "";
   static const String domain = "https://api.saleboltapp.com";
-  static const String baseUrl = 'http://159.223.87.59:8000/api/v1';
+  static const String baseUrl = 'http://localhost:3000/api/restaurant/v1';
   static const String playStoreID = "";
   static const String appStoreID = "";
   static const String statementSyncTime = '2021-01-01';

@@ -1,4 +1,4 @@
 class CmsConstants {
   static bool multipleLanguages = true;
-  static bool rememberLogin = false;
+  static bool rememberLogin = true;
 }

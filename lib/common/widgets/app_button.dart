@@ -91,13 +91,14 @@ class AppButton extends StatelessWidget {
                   style: textStyle ??
                       ConfigText.button,
                 ),
-                buildLoading(Colors.white)
+                buildLoading(ConfigColor.primary)
               ],
             ),
           );
         case ButtonType.outline:
           return OutlinedButton.icon(
             style: OutlinedButton.styleFrom(
+              primary: ConfigColor.primary,
               minimumSize: const Size(64, 44),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -144,6 +145,7 @@ class AppButton extends StatelessWidget {
           return ElevatedButton(
             onPressed: disabled ? null : onPressed,
             style: ElevatedButton.styleFrom(
+               primary: ConfigColor.primary,
               minimumSize: const Size(64, 44),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -159,13 +161,14 @@ class AppButton extends StatelessWidget {
                   style: textStyle ??
                         ConfigText.button,
                 ),
-                buildLoading(Colors.white)
+                 buildLoading(ConfigColor.primary)
               ],
             ),
           );
         case ButtonType.outline:
           return OutlinedButton(
             style: OutlinedButton.styleFrom(
+               primary: ConfigColor.primary,
               minimumSize: const Size(64, 44),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

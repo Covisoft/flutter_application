@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/configs/config.dart';
 import 'package:flutter_app/common/utils/utils.dart';
 import 'package:flutter_app/common/widgets/widget.dart';
+import 'package:flutter_app/screens/screen.dart';
+// import 'package:flutter_app/screens/screen.dart';
 
 class LanguageSetting extends StatefulWidget {
   const LanguageSetting({Key? key}) : super(key: key);
@@ -58,16 +60,19 @@ class _LanguageSettingState extends State<LanguageSetting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ConfigColor.primary,
         centerTitle: true,
         elevation: 0,
         title: Text(
           Translate.of(context).translate('change_language'),
+          style: ConfigText.headline5,
         ),
         actions: [
           AppButton(
-            text:Translate.of(context).translate('apply'),
+            text: Translate.of(context).translate('apply'),
             onPressed: onChangeLanguage,
             type: ButtonType.text,
+            textStyle: ConfigText.subtitle,
           ),
         ],
       ),
@@ -104,7 +109,15 @@ class _LanguageSettingState extends State<LanguageSetting> {
                     title: UtilLanguage.getGlobalLanguageName(
                       item.languageCode,
                     ),
-                    trailing: trailing,
+                    leading: SizedBox(
+                        width: ConfigSize.SPACING_SIZE_2, child: trailing),
+                    trailing: IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, ConfigRoutes.editLanguage,
+                              arguments: DetailLanguageArguments(item));
+                        },
+                        icon: const Icon(Icons.edit_note_sharp)),
                     onPressed: () {
                       setState(() {
                         languageSelected = item;

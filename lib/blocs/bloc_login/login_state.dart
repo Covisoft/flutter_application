@@ -6,10 +6,13 @@ class LoginState with _$LoginState {
     required FormzStatus status,
     required Username username,
     required Password password,
+    required bool rememberLogin,
+    
   }) = _LoginState;
   factory LoginState.initial() => const LoginState(
       username: Username.pure(),
       password: Password.pure(),
+      rememberLogin: true,
       status: FormzStatus.pure);
 }
 
